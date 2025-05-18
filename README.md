@@ -1,6 +1,6 @@
 # Restaurants
 
-# Start project
+## Start project
 
 - select main branch
 - npm i
