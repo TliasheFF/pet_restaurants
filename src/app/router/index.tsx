@@ -10,7 +10,6 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <RestaurantsPage /> },
       { path: "restaurant/:seoUrl", element: <RestaurantPage /> },
-      // { path: "users/:userId", element: <></> },
     ],
   },
 ]);
