@@ -29,10 +29,7 @@ export const LoginForm: FC<LoginModalProps> = (props) => {
   };
 
   return (
-    <FormContainer
-      defaultValues={{ email: "test@mail.ru", password: "password" }}
-      onSuccess={handleSubmit}
-    >
+    <FormContainer defaultValues={{ email: "", password: "" }} onSuccess={handleSubmit}>
       <Stack spacing={2}>
         {error && <Alert severity="error">{error}</Alert>}
         <TextFieldElement name={"email"} label={"Логин"} required type={"email"} />
