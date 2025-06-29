@@ -1,6 +1,7 @@
 import { LoginButton } from "@features/login";
-import { Restaurant, ShoppingCart } from "@mui/icons-material";
-import { AppBar, IconButton, Toolbar, Typography } from "@mui/material";
+import { ShoppingCart, Store } from "@mui/icons-material";
+import { AppBar, IconButton, Toolbar, Tooltip, Typography } from "@mui/material";
+import { Link } from "react-router";
 
 export const Header = () => {
   return (
@@ -11,11 +12,17 @@ export const Header = () => {
           component="span"
           sx={{ flexGrow: 1, display: "flex", alignItems: "center", gap: 1 }}
         >
-          <Restaurant /> Сервис заказа блюд
+          <Link to="/" style={{ color: "inherit" }}>
+            <Store />
+          </Link>
         </Typography>
-        <IconButton color="inherit">
-          <ShoppingCart />
-        </IconButton>
+
+        <Tooltip title="Корзина">
+          <IconButton color="inherit">
+            <ShoppingCart />
+          </IconButton>
+        </Tooltip>
+
         <LoginButton />
       </Toolbar>
     </AppBar>

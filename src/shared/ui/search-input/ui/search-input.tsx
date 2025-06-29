@@ -7,12 +7,13 @@ interface SearchProps<T> {
   onSearch: (filteredItems: T[]) => void;
   isFullWidth?: boolean;
   label?: string;
+  width?: number;
 }
 
 type SearchComponent = <T>(props: SearchProps<T>) => ReactElement;
 
-export const Search: SearchComponent = <T,>(props: SearchProps<T>) => {
-  const { items, searchKey, onSearch, isFullWidth = false, label = "Поиск" } = props;
+export const SearchInput: SearchComponent = <T,>(props: SearchProps<T>) => {
+  const { items, searchKey, onSearch, isFullWidth = false, label = "Поиск", width } = props;
 
   const handleSearch = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
@@ -31,7 +32,7 @@ export const Search: SearchComponent = <T,>(props: SearchProps<T>) => {
       variant="standard"
       fullWidth={isFullWidth}
       label={label}
-      sx={{ marginY: 2 }}
+      sx={{ marginY: 2, width }}
     />
   );
 };

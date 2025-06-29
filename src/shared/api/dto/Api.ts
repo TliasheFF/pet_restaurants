@@ -757,15 +757,12 @@ export interface FullRequestParams
   body?: unknown;
 }
 
-export type RequestParams = Omit<
-  FullRequestParams,
-  "body" | "method" | "query" | "path"
->;
+export type RequestParams = Omit<FullRequestParams, "body" | "method" | "query" | "path">;
 
 export interface ApiConfig<SecurityDataType = unknown>
   extends Omit<AxiosRequestConfig, "data" | "cancelToken"> {
   securityWorker?: (
-    securityData: SecurityDataType | null,
+    securityData: SecurityDataType | null
   ) => Promise<AxiosRequestConfig | void> | AxiosRequestConfig | void;
   secure?: boolean;
   format?: ResponseType;
@@ -806,7 +803,7 @@ export class HttpClient<SecurityDataType = unknown> {
 
   protected mergeRequestParams(
     params1: AxiosRequestConfig,
-    params2?: AxiosRequestConfig,
+    params2?: AxiosRequestConfig
   ): AxiosRequestConfig {
     const method = params1.method || (params2 && params2.method);
 
@@ -816,9 +813,7 @@ export class HttpClient<SecurityDataType = unknown> {
       ...(params2 || {}),
       headers: {
         ...((method &&
-          this.instance.defaults.headers[
-            method.toLowerCase() as keyof HeadersDefaults
-          ]) ||
+          this.instance.defaults.headers[method.toLowerCase() as keyof HeadersDefaults]) ||
           {}),
         ...(params1.headers || {}),
         ...((params2 && params2.headers) || {}),
@@ -840,15 +835,11 @@ export class HttpClient<SecurityDataType = unknown> {
     }
     return Object.keys(input || {}).reduce((formData, key) => {
       const property = input[key];
-      const propertyContent: any[] =
-        property instanceof Array ? property : [property];
+      const propertyContent: any[] = property instanceof Array ? property : [property];
 
       for (const formItem of propertyContent) {
         const isFileType = formItem instanceof Blob || formItem instanceof File;
-        formData.append(
-          key,
-          isFileType ? formItem : this.stringifyFormItem(formItem),
-        );
+        formData.append(key, isFileType ? formItem : this.stringifyFormItem(formItem));
       }
 
       return formData;
@@ -872,21 +863,11 @@ export class HttpClient<SecurityDataType = unknown> {
     const requestParams = this.mergeRequestParams(params, secureParams);
     const responseFormat = format || this.format || undefined;
 
-    if (
-      type === ContentType.FormData &&
-      body &&
-      body !== null &&
-      typeof body === "object"
-    ) {
+    if (type === ContentType.FormData && body && body !== null && typeof body === "object") {
       body = this.createFormData(body as Record<string, unknown>);
     }
 
-    if (
-      type === ContentType.Text &&
-      body &&
-      body !== null &&
-      typeof body !== "string"
-    ) {
+    if (type === ContentType.Text && body && body !== null && typeof body !== "string") {
       body = JSON.stringify(body);
     }
 
@@ -911,9 +892,7 @@ export class HttpClient<SecurityDataType = unknown> {
  *
  * remote-waiter-system
  */
-export class Api<
-  SecurityDataType extends unknown,
-> extends HttpClient<SecurityDataType> {
+export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {
   users = {
     /**
      * No description
@@ -943,7 +922,7 @@ export class Api<
      * @request POST:/identity/signin
      */
     authControllerLogin: (data: LoginUserDto, params: RequestParams = {}) =>
-      this.request<void, any>({
+      this.request<{ accessToken: string; refreshToken: string }, any>({
         path: `/identity/signin`,
         method: "POST",
         body: data,
@@ -959,10 +938,7 @@ export class Api<
      * @summary Регистрация
      * @request POST:/identity/signup
      */
-    authControllerRegistration: (
-      data: CreateUserDto,
-      params: RequestParams = {},
-    ) =>
+    authControllerRegistration: (data: CreateUserDto, params: RequestParams = {}) =>
       this.request<void, any>({
         path: `/identity/signup`,
         method: "POST",
@@ -979,10 +955,7 @@ export class Api<
      * @summary Авторизация или регистрация по телефону
      * @request POST:/identity/auth-by-phone
      */
-    authControllerAuthByPhone: (
-      data: LoginByPhoneDto,
-      params: RequestParams = {},
-    ) =>
+    authControllerAuthByPhone: (data: LoginByPhoneDto, params: RequestParams = {}) =>
       this.request<void, any>({
         path: `/identity/auth-by-phone`,
         method: "POST",
@@ -999,10 +972,7 @@ export class Api<
      * @summary Обновление токенов для пользователя
      * @request POST:/identity/refresh-token
      */
-    authControllerRefreshToken: (
-      data: RefreshTokenDto,
-      params: RequestParams = {},
-    ) =>
+    authControllerRefreshToken: (data: RefreshTokenDto, params: RequestParams = {}) =>
       this.request<void, any>({
         path: `/identity/refresh-token`,
         method: "POST",
@@ -1025,7 +995,7 @@ export class Api<
         referralCode: string;
       },
       data: CreateUserDto,
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<void, any>({
         path: `/identity/waiter/register`,
@@ -1046,10 +1016,7 @@ export class Api<
      * @request POST:/restaurant/create
      * @secure
      */
-    restaurantControllerCreateRestaurant: (
-      data: CreateRestaurantDto,
-      params: RequestParams = {},
-    ) =>
+    restaurantControllerCreateRestaurant: (data: CreateRestaurantDto, params: RequestParams = {}) =>
       this.request<Restaurant, any>({
         path: `/restaurant/create`,
         method: "POST",
@@ -1074,7 +1041,7 @@ export class Api<
         restaurantId: string;
       },
       data: CreateRestaurantDto,
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<void, any>({
         path: `/restaurant/update`,
@@ -1099,7 +1066,7 @@ export class Api<
       query: {
         restaurantId: string;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<void, any>({
         path: `/restaurant/delete`,
@@ -1123,7 +1090,7 @@ export class Api<
         pageSize: number;
         pageNumber: number;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<RestaurantPaginationResultDto, any>({
         path: `/restaurant/get-user-restaurants`,
@@ -1147,7 +1114,7 @@ export class Api<
         pageSize: string;
         pageNumber: string;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<RestaurantPaginationResultDto, any>({
         path: `/restaurant/get-all-restaurants`,
@@ -1184,7 +1151,7 @@ export class Api<
       query: {
         seoUrl: string;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<Restaurant, any>({
         path: `/restaurant/get-by-url`,
@@ -1208,7 +1175,7 @@ export class Api<
         restaurantId: string;
         expiresIn: string;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<any, ReferralCode>({
         path: `/restaurant/create-code`,
@@ -1231,7 +1198,7 @@ export class Api<
         restaurantId: string;
         code: string;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<void, any>({
         path: `/restaurant/check-code`,
@@ -1253,7 +1220,7 @@ export class Api<
       query: {
         restaurantId: string;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<any, ReferralCode[]>({
         path: `/restaurant/get-codes`,
@@ -1277,7 +1244,7 @@ export class Api<
         restaurantId: string;
         code: string;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<void, any>({
         path: `/restaurant/delete-code`,
@@ -1302,7 +1269,7 @@ export class Api<
         pageSize: string;
         pageNumber: string;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<any, WaiterPaginationResult>({
         path: `/restaurant/get-waiters-by-restaurant`,
@@ -1327,7 +1294,7 @@ export class Api<
         waiterId: string;
         status: "enabled" | "disabled";
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<void, any>({
         path: `/restaurant/change-waiter-status`,
@@ -1351,7 +1318,7 @@ export class Api<
       query: {
         restaurantId: string;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<GetCartDto[], any>({
         path: `/cart/get-user-cart`,
@@ -1375,7 +1342,7 @@ export class Api<
       query: {
         productId: string;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<void, any>({
         path: `/cart/add-to-cart`,
@@ -1399,7 +1366,7 @@ export class Api<
         productId: string;
         restaurantId: string;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<void, any>({
         path: `/cart/remove-from-cart`,
@@ -1422,7 +1389,7 @@ export class Api<
       query: {
         restaurantId: string;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<void, any>({
         path: `/cart/clear-cart`,
@@ -1441,10 +1408,7 @@ export class Api<
      * @request PATCH:/cart/change-quantity
      * @secure
      */
-    cartControllerChangeQuantity: (
-      data: ChangeQuantityDto,
-      params: RequestParams = {},
-    ) =>
+    cartControllerChangeQuantity: (data: ChangeQuantityDto, params: RequestParams = {}) =>
       this.request<void, any>({
         path: `/cart/change-quantity`,
         method: "PATCH",
@@ -1463,10 +1427,7 @@ export class Api<
      * @summary Generate code with requested phone
      * @request POST:/sms/generateCode
      */
-    smsControllerGenerateCode: (
-      data: GenerateCodeDto,
-      params: RequestParams = {},
-    ) =>
+    smsControllerGenerateCode: (data: GenerateCodeDto, params: RequestParams = {}) =>
       this.request<void, any>({
         path: `/sms/generateCode`,
         method: "POST",
@@ -1508,7 +1469,7 @@ export class Api<
         restaurantId: string;
       },
       data: CreateCategoryDto,
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<void, any>({
         path: `/Category/create`,
@@ -1532,7 +1493,7 @@ export class Api<
       query: {
         id: string;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<GetCategoryDto[], any>({
         path: `/Category/get-categories-by-id`,
@@ -1554,7 +1515,7 @@ export class Api<
       query: {
         seoUrl: string;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<void, any>({
         path: `/Category/get-categories-by-seoUrl`,
@@ -1576,7 +1537,7 @@ export class Api<
         /** ID категории */
         id: string;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<Category, any>({
         path: `/Category/get-category`,
@@ -1600,7 +1561,7 @@ export class Api<
         id: string;
         restaurantId: string;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<void, any>({
         path: `/Category/delete`,
@@ -1625,7 +1586,7 @@ export class Api<
         restaurantId: string;
       },
       data: UpdateCategoryDto,
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<void, any>({
         path: `/Category/update`,
@@ -1652,7 +1613,7 @@ export class Api<
         restaurantId: string;
       },
       data: CreateProductDto,
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<Product, any>({
         path: `/products/create`,
@@ -1680,7 +1641,7 @@ export class Api<
         productId: string;
       },
       data: CreateProductDto,
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<void, any>({
         path: `/products/update`,
@@ -1706,7 +1667,7 @@ export class Api<
         restaurantId: string;
         productId: string;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<void, any>({
         path: `/products/delete`,
@@ -1730,7 +1691,7 @@ export class Api<
         pageNumber: string;
         pageSize: string;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<ProductPaginationResult, any>({
         path: `/products/get-product-by-rest-seo-url`,
@@ -1753,7 +1714,7 @@ export class Api<
         /** @example 1 */
         productId: string;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<Product, any>({
         path: `/products/get-product-by-id`,
@@ -1778,7 +1739,7 @@ export class Api<
         pageNumber: string;
         pageSize: string;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<ProductPaginationResult, any>({
         path: `/products/get-product-by-category-id`,
@@ -1798,10 +1759,7 @@ export class Api<
      * @request POST:/orders/create
      * @secure
      */
-    ordersControllerCreateOrder: (
-      data: CreateOrderDto,
-      params: RequestParams = {},
-    ) =>
+    ordersControllerCreateOrder: (data: CreateOrderDto, params: RequestParams = {}) =>
       this.request<CreateOrderResponse, any>({
         path: `/orders/create`,
         method: "POST",
@@ -1825,7 +1783,7 @@ export class Api<
       query: {
         orderId: string;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<GetOrderDto, any>({
         path: `/orders/get-by-id`,
@@ -1850,7 +1808,7 @@ export class Api<
         pageNumber: string;
         pageSize: string;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<GetOrderDto[], any>({
         path: `/orders/get-orders`,
@@ -1895,7 +1853,7 @@ export class Api<
         pageNumber: string;
         orderNumber?: string;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<DashboardOrderPaginationResult[], any>({
         path: `/orders/dashboard/restaurant`,
@@ -1921,7 +1879,7 @@ export class Api<
         orderId: string;
         orderStatus: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<void, any>({
         path: `/orders/dashboard/change-status`,
@@ -1945,7 +1903,7 @@ export class Api<
         restaurantId: string;
         orderId: string;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<GetDashboardOrderDto, any>({
         path: `/orders/dashboard/get-by-id`,

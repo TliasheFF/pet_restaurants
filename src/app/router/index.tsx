@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router";
 import { Layout } from "../layout";
 import { RestaurantsPage } from "@pages/restaurants";
 import { RestaurantPage } from "@pages/restaurant";
+import { NotFoundPage } from "@pages/not-found";
 
 export const router = createBrowserRouter([
   {
@@ -11,5 +12,9 @@ export const router = createBrowserRouter([
       { index: true, element: <RestaurantsPage /> },
       { path: "restaurant/:seoUrl", element: <RestaurantPage /> },
     ],
+  },
+  {
+    path: "*",
+    element: <NotFoundPage />,
   },
 ]);
