@@ -1,9 +1,14 @@
 import { DEFAULT_DURATION } from '../constants/default-duration';
-import { notificationStore } from './notification';
+import { $notificationStore } from './notification';
 
-export const useNotification = () => {
+type NotificationReturnType = {
+  showNotification: (message: string, duration?: number) => void;
+  hideNotification: () => void;
+};
+
+export const useNotification = (): NotificationReturnType => {
   const showNotification = (message: string, duration?: number) => {
-    notificationStore.setState({
+    $notificationStore.setState({
       isOpen: true,
       message,
       duration: duration ?? DEFAULT_DURATION,
@@ -11,7 +16,7 @@ export const useNotification = () => {
   };
 
   const hideNotification = () => {
-    notificationStore.setState({ isOpen: false });
+    $notificationStore.setState({ isOpen: false });
   };
 
   return { showNotification, hideNotification };

@@ -1,4 +1,4 @@
-import { userData } from './user-data';
+import { $userData } from './user-data';
 
 interface UserDataReturnType {
   isAuthorized: boolean;
@@ -6,7 +6,7 @@ interface UserDataReturnType {
 }
 
 export const useUserData = (): UserDataReturnType => {
-  const { isAuthorized, setIsAuthorized } = userData();
+  const { isAuthorized, setIsAuthorized } = $userData();
 
   return { isAuthorized, setIsAuthorized };
 };

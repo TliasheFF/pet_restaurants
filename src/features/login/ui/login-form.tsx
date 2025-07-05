@@ -1,8 +1,6 @@
 import { Box, Button, FormHelperText, Stack } from '@mui/material';
-import { useNotification } from '@shared/ui/notification';
 import IMask from 'imask';
 import { MuiOtpInput } from 'mui-one-time-password-input';
-import { useEffect } from 'react';
 import {
   Controller,
   FormContainer,
@@ -44,15 +42,8 @@ const OtpInputField = ({ name, length }: { name: string; length: number }) => {
 };
 
 export const LoginForm = () => {
-  const { showNotification } = useNotification();
-
-  const {
-    generateCode,
-    isSuccess,
-    error: codeError,
-    errorText: codeErrorText,
-  } = useGenerateLoginCode();
-  const { onLogin } = useLogin();
+  const { mutate: generateCode, isSuccess } = useGenerateLoginCode();
+  const { mutate: onLogin } = useLogin();
 
   const onSubmit = (values: { phone: string; code: string }) => {
     if (isSuccess) {
@@ -69,12 +60,6 @@ export const LoginForm = () => {
     masked.resolve(value);
     return masked.value;
   };
-
-  useEffect(() => {
-    if (codeError) {
-      showNotification(codeErrorText);
-    }
-  }, [codeError]);
 
   return (
     <FormContainer defaultValues={{ phone: '', code: '' }} onSuccess={onSubmit}>

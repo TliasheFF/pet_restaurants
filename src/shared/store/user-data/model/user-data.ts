@@ -5,7 +5,7 @@ interface IUserData {
   setIsAuthorized: (value: boolean) => void;
 }
 
-export const userData = create<IUserData>((set) => ({
+export const $userData = create<IUserData>((set) => ({
   isAuthorized: !!localStorage.getItem('accessToken'),
   setIsAuthorized: (value: boolean) => set({ isAuthorized: value }),
 }));
