@@ -3,6 +3,8 @@ import { Layout } from "../layout";
 import { RestaurantsPage } from "@pages/restaurants";
 import { RestaurantPage } from "@pages/restaurant";
 import { NotFoundPage } from "@pages/not-found";
+import { CartPage } from "@pages/cart";
+import { AuthProvider } from "@app/providers";
 
 export const router = createBrowserRouter([
   {
@@ -11,6 +13,14 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <RestaurantsPage /> },
       { path: "restaurant/:seoUrl", element: <RestaurantPage /> },
+      {
+        path: "cart",
+        element: (
+          <AuthProvider>
+            <CartPage />
+          </AuthProvider>
+        ),
+      },
     ],
   },
   {

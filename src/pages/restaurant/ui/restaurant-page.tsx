@@ -44,7 +44,7 @@ export const RestaurantPage = () => {
 
       <BaseItemsGrid>
         {productsData?.data.items.map((product) => (
-          <ProductCard key={product.id} dish={product} />
+          <ProductCard key={product.id} product={product} />
         ))}
       </BaseItemsGrid>
 

@@ -3,7 +3,6 @@ import { RestaurantCard } from "@entities/restaurants";
 import { Pagination } from "@mui/material";
 import type { Restaurant } from "@shared/api/dto/Api";
 import { Loader } from "@shared/ui/loader";
-import { SearchInput } from "@shared/ui/search-input";
 import { useEffect, useState } from "react";
 
 import { BaseItemsGrid } from "@widgets/base-items-grid";
@@ -42,15 +41,7 @@ export const RestaurantsPage = () => {
   const count = Math.ceil(dataSource?.totalItems! / PER_PAGE);
 
   return (
-    <div>
-      <SearchInput
-        items={dataSource?.items}
-        searchKey="name"
-        onSearch={setFilteredRestaurants}
-        label="Найти ресторан"
-        isFullWidth
-      />
-
+    <>
       <BaseItemsGrid>
         {filteredRestaurants?.map((item) => (
           <RestaurantCard key={item.id} restaurant={item} />
@@ -62,6 +53,6 @@ export const RestaurantsPage = () => {
           <Pagination count={count} page={page} onChange={(_, pageNumber) => setPage(pageNumber)} />
         )}
       </div>
-    </div>
+    </>
   );
 };

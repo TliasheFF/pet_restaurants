@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { cleanePhone } from "../utils/clean-phone";
 import { MuiOtpInput } from "mui-one-time-password-input";
 
-const MuiOtpInputField = ({ name, length }: { name: string; length: number }) => {
+const OtpInputField = ({ name, length }: { name: string; length: number }) => {
   const { control } = useFormContext();
 
   return (
@@ -20,6 +20,7 @@ const MuiOtpInputField = ({ name, length }: { name: string; length: number }) =>
           <MuiOtpInput
             sx={{ gap: 1 }}
             {...field}
+            autoFocus
             length={length}
             onChange={(value) => field.onChange(value)}
           />
@@ -67,6 +68,7 @@ export const LoginForm = () => {
         {error && <Alert severity="error">{error}</Alert>}
         <TextFieldElement
           required
+          autoFocus
           name="phone"
           label="Номер телефона"
           placeholder="+7 (999) 999-99-99"
@@ -75,7 +77,7 @@ export const LoginForm = () => {
             output: (e) => e.target.value.replace(/\D/g, ""),
           }}
         />
-        {isSuccess && <MuiOtpInputField name="code" length={4} />}
+        {isSuccess && <OtpInputField name="code" length={4} />}
         <Button type="submit">{isSuccess ? "Войти" : "Получить код"}</Button>
       </Stack>
     </FormContainer>

@@ -1,6 +1,6 @@
 export const MAIN_COLORS = {
-  primary: "#0c8cb3",
-  primaryDark: "#023749",
+  primary: "#43a047",
+  prinaryLight: "#66BB6A",
   secondary: "#FF6626",
   secondaryLight: "#FF7C45",
   secondaryDark: "#FF4E03",
@@ -21,5 +21,4 @@ export const MAIN_COLORS = {
   special: "#21293D",
   white: "#FFFFFF",
   black: "#000000D9",
-  splitColor: "#F0F0F0",
 };

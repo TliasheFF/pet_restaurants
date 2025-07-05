@@ -17,12 +17,13 @@ export const Header = () => {
           </Link>
         </Typography>
 
-        <Tooltip title="Корзина">
-          <IconButton color="inherit">
-            <ShoppingCart />
-          </IconButton>
-        </Tooltip>
-
+        <Link to="/cart" style={{ color: "inherit" }}>
+          <Tooltip title="Корзина">
+            <IconButton color="inherit">
+              <ShoppingCart />
+            </IconButton>
+          </Tooltip>
+        </Link>
         <LoginButton />
       </Toolbar>
     </AppBar>
