@@ -1,10 +1,11 @@
-import { createTheme } from "@mui/material";
-import { MAIN_COLORS } from "../constants/main-colors";
+import { createTheme } from '@mui/material';
+
+import { MAIN_COLORS } from '../constants/main-colors';
 
 export const theme = createTheme({
   cssVariables: true,
   typography: {
-    fontFamily: ["Montserrat", "sans-serif"].join(","),
+    fontFamily: ['Montserrat', 'sans-serif'].join(','),
   },
   palette: {
     primary: {
@@ -15,7 +16,8 @@ export const theme = createTheme({
     MuiCard: {
       styleOverrides: {
         root: {
-          boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+          boxShadow:
+            '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
           borderRadius: 10,
         },
       },
@@ -30,7 +32,7 @@ export const theme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          textTransform: "none",
+          textTransform: 'none',
         },
       },
     },

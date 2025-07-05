@@ -1,4 +1,4 @@
-import { create } from "zustand";
+import { create } from 'zustand';
 
 interface IUserData {
   isAuthorized: boolean;
@@ -6,6 +6,6 @@ interface IUserData {
 }
 
 export const userData = create<IUserData>((set) => ({
-  isAuthorized: !!localStorage.getItem("accessToken"),
+  isAuthorized: !!localStorage.getItem('accessToken'),
   setIsAuthorized: (value: boolean) => set({ isAuthorized: value }),
 }));

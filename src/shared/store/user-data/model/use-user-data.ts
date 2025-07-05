@@ -1,4 +1,4 @@
-import { userData } from "./user-data";
+import { userData } from './user-data';
 
 interface UserDataReturnType {
   isAuthorized: boolean;

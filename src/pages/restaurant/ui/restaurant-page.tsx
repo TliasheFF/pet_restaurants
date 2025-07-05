@@ -1,12 +1,12 @@
-import { ProductCard } from "@entities/restaurants";
-import { useGetProducts } from "@entities/restaurants/api/use-get-products";
-import { useGetRestaurant } from "@entities/restaurants/api/use-get-restaurant";
-import { ArrowBack } from "@mui/icons-material";
-import { Pagination, Tooltip, Typography } from "@mui/material";
-import { Loader } from "@shared/ui/loader";
-import { BaseItemsGrid } from "@widgets/base-items-grid";
-import { useState } from "react";
-import { Link, useParams } from "react-router";
+import { ProductCard } from '@entities/restaurants';
+import { useGetProducts } from '@entities/restaurants/api/use-get-products';
+import { useGetRestaurant } from '@entities/restaurants/api/use-get-restaurant';
+import { ArrowBack } from '@mui/icons-material';
+import { Pagination, Tooltip, Typography } from '@mui/material';
+import { Loader } from '@shared/ui/loader';
+import { BaseItemsGrid } from '@widgets/base-items-grid';
+import { useState } from 'react';
+import { Link, useParams } from 'react-router';
 
 const PER_PAGE = 6;
 
@@ -14,11 +14,11 @@ export const RestaurantPage = () => {
   const [page, setPage] = useState(1);
   const { seoUrl } = useParams();
 
-  const { data: restaurantData } = useGetRestaurant(seoUrl ?? "");
+  const { data: restaurantData } = useGetRestaurant(seoUrl ?? '');
   // как продукты соотносятся с категориями?
   // const {} = useGetCategories({ id: String(restaurantData?.data.id) ?? "" });
   const { data: productsData, isLoading: isProductsLoading } = useGetProducts({
-    seoUrl: seoUrl ?? "",
+    seoUrl: seoUrl ?? '',
     pageSize: String(PER_PAGE),
     pageNumber: String(page - 1),
   });
@@ -31,9 +31,11 @@ export const RestaurantPage = () => {
 
   return (
     <>
-      <div style={{ marginTop: 20, display: "flex", alignItems: "end", gap: 10 }}>
+      <div
+        style={{ marginTop: 20, display: 'flex', alignItems: 'end', gap: 10 }}
+      >
         <Tooltip title="Назад">
-          <Link to={"/"} style={{ color: "inherit" }}>
+          <Link to={'/'} style={{ color: 'inherit' }}>
             <ArrowBack />
           </Link>
         </Tooltip>
@@ -48,9 +50,13 @@ export const RestaurantPage = () => {
         ))}
       </BaseItemsGrid>
 
-      <div style={{ display: "flex", justifyContent: "center" }}>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
         {productsData?.data?.totalItems! > PER_PAGE && (
-          <Pagination count={count} page={page} onChange={(_, pageNumber) => setPage(pageNumber)} />
+          <Pagination
+            count={count}
+            page={page}
+            onChange={(_, pageNumber) => setPage(pageNumber)}
+          />
         )}
       </div>
     </>

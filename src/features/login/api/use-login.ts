@@ -1,7 +1,7 @@
-import { api } from "@shared/api";
-import { useUserData } from "@shared/store/user-data";
-import { getAxiosErrorText } from "@shared/utils";
-import { useMutation } from "@tanstack/react-query";
+import { api } from '@shared/api';
+import { useUserData } from '@shared/store/user-data';
+import { getAxiosErrorText } from '@shared/utils';
+import { useMutation } from '@tanstack/react-query';
 
 export const useLogin = () => {
   const { setIsAuthorized } = useUserData();
@@ -10,8 +10,8 @@ export const useLogin = () => {
     mutationFn: (params: { phone: string; code: string }) =>
       api.identity.authControllerAuthByPhone(params),
     onSuccess: (data) => {
-      localStorage.setItem("accessToken", data.data.accessToken);
-      localStorage.setItem("refreshToken", data.data.refreshToken);
+      localStorage.setItem('accessToken', data.data.accessToken);
+      localStorage.setItem('refreshToken', data.data.refreshToken);
       setIsAuthorized(true);
     },
   });

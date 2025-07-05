@@ -1,6 +1,7 @@
-import { Backdrop, Box, Modal, type SxProps } from "@mui/material";
-import { type FC } from "react";
-import { LoginForm } from "./login-form";
+import { Backdrop, Box, Modal, type SxProps } from '@mui/material';
+import { type FC } from 'react';
+
+import { LoginForm } from './login-form';
 
 interface LoginModalProps {
   isOpen: boolean;
@@ -10,13 +11,13 @@ interface LoginModalProps {
 const boxStyles: SxProps = {
   padding: 2,
   width: 300,
-  height: "fit-content",
+  height: 'fit-content',
   borderRadius: 2,
-  backgroundColor: "background.paper",
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
+  backgroundColor: 'background.paper',
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
 };
 
 export const LoginModal: FC<LoginModalProps> = (props) => {

@@ -1,6 +1,6 @@
-import { Header } from "@widgets/header";
-import { Box, Container } from "@mui/material";
-import { Outlet } from "react-router";
+import { Box, Container } from '@mui/material';
+import { Header } from '@widgets/header';
+import { Outlet } from 'react-router';
 
 export const Layout = () => {
   return (

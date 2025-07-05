@@ -1,6 +1,6 @@
-import { api } from "@shared/api";
-import { getAxiosErrorText } from "@shared/utils";
-import { useMutation } from "@tanstack/react-query";
+import { api } from '@shared/api';
+import { getAxiosErrorText } from '@shared/utils';
+import { useMutation } from '@tanstack/react-query';
 
 export const useGenerateLoginCode = () => {
   const {
@@ -8,7 +8,8 @@ export const useGenerateLoginCode = () => {
     error,
     isSuccess,
   } = useMutation({
-    mutationFn: (params: { phone: string }) => api.sms.smsControllerGenerateCode(params),
+    mutationFn: (params: { phone: string }) =>
+      api.sms.smsControllerGenerateCode(params),
   });
 
   return {

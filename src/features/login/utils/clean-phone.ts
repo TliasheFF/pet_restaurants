@@ -1,1 +1,1 @@
-export const cleanePhone = (phone: string) => phone.replace(/\D/g, "");
+export const cleanePhone = (phone: string) => phone.replace(/\D/g, '');

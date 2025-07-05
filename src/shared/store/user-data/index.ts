@@ -1,1 +1,1 @@
-export { useUserData } from "./model/use-user-data";
+export { useUserData } from './model/use-user-data';

@@ -1,1 +1,1 @@
-export { getAxiosErrorText } from "./get-axios-error-text";
+export { getAxiosErrorText } from './get-axios-error-text';

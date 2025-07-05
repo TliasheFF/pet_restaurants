@@ -1,5 +1,5 @@
-import { Backdrop, Box, CircularProgress, Typography } from "@mui/material";
-import type { FC } from "react";
+import { Backdrop, Box, CircularProgress, Typography } from '@mui/material';
+import type { FC } from 'react';
 
 interface LoaderProps {
   isOpen: boolean;
@@ -7,16 +7,19 @@ interface LoaderProps {
 }
 
 export const Loader: FC<LoaderProps> = (props) => {
-  const { isOpen, text = "Загрузка..." } = props;
+  const { isOpen, text = 'Загрузка...' } = props;
 
   return (
-    <Backdrop sx={(theme) => ({ color: "#fff", zIndex: theme.zIndex.drawer + 1 })} open={isOpen}>
+    <Backdrop
+      sx={(theme) => ({ color: '#fff', zIndex: theme.zIndex.drawer + 1 })}
+      open={isOpen}
+    >
       <Box
         sx={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
       >
         <CircularProgress />

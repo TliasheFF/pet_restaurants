@@ -1,4 +1,4 @@
-import { Api } from "./dto/Api";
+import { Api } from './dto/Api';
 
 export const api = new Api({
   baseURL: import.meta.env.VITE_API_BASE_URL,
@@ -6,6 +6,6 @@ export const api = new Api({
 });
 
 api.instance.interceptors.request.use((config) => {
-  config.headers.Authorization = `Bearer ${localStorage.getItem("accessToken")}`;
+  config.headers.Authorization = `Bearer ${localStorage.getItem('accessToken')}`;
   return config;
 });

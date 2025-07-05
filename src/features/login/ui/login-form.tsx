@@ -1,11 +1,17 @@
-import { Alert, Box, Button, FormHelperText, Stack } from "@mui/material";
-import { Controller, FormContainer, TextFieldElement, useFormContext } from "react-hook-form-mui";
-import { useLogin } from "../api/use-login";
-import { useGenerateLoginCode } from "../api/use-generate-code";
-import IMask from "imask";
-import { useEffect, useState } from "react";
-import { cleanePhone } from "../utils/clean-phone";
-import { MuiOtpInput } from "mui-one-time-password-input";
+import { Alert, Box, Button, FormHelperText, Stack } from '@mui/material';
+import IMask from 'imask';
+import { MuiOtpInput } from 'mui-one-time-password-input';
+import { useEffect, useState } from 'react';
+import {
+  Controller,
+  FormContainer,
+  TextFieldElement,
+  useFormContext,
+} from 'react-hook-form-mui';
+
+import { useGenerateLoginCode } from '../api/use-generate-code';
+import { useLogin } from '../api/use-login';
+import { cleanePhone } from '../utils/clean-phone';
 
 const OtpInputField = ({ name, length }: { name: string; length: number }) => {
   const { control } = useFormContext();
@@ -14,7 +20,10 @@ const OtpInputField = ({ name, length }: { name: string; length: number }) => {
     <Controller
       name={name}
       control={control}
-      rules={{ validate: (value) => value.length === length || "Код должен содержать 4 символа" }}
+      rules={{
+        validate: (value) =>
+          value.length === length || 'Код должен содержать 4 символа',
+      }}
       render={({ field, fieldState }) => (
         <Box>
           <MuiOtpInput
@@ -24,7 +33,9 @@ const OtpInputField = ({ name, length }: { name: string; length: number }) => {
             length={length}
             onChange={(value) => field.onChange(value)}
           />
-          {fieldState.invalid && <FormHelperText error>{fieldState.error?.message}</FormHelperText>}
+          {fieldState.invalid && (
+            <FormHelperText error>{fieldState.error?.message}</FormHelperText>
+          )}
         </Box>
       )}
     />
@@ -52,7 +63,7 @@ export const LoginForm = () => {
 
   const transformPhoneNumber = (value: string) => {
     const masked = IMask.createMask({
-      mask: "+7 (000) 000-00-00",
+      mask: '+7 (000) 000-00-00',
     });
     masked.resolve(value);
     return masked.value;
@@ -63,7 +74,7 @@ export const LoginForm = () => {
   }, [codeError, loginError]);
 
   return (
-    <FormContainer defaultValues={{ phone: "", code: "" }} onSuccess={onSubmit}>
+    <FormContainer defaultValues={{ phone: '', code: '' }} onSuccess={onSubmit}>
       <Stack spacing={2}>
         {error && <Alert severity="error">{error}</Alert>}
         <TextFieldElement
@@ -74,11 +85,11 @@ export const LoginForm = () => {
           placeholder="+7 (999) 999-99-99"
           transform={{
             input: transformPhoneNumber,
-            output: (e) => e.target.value.replace(/\D/g, ""),
+            output: (e) => e.target.value.replace(/\D/g, ''),
           }}
         />
         {isSuccess && <OtpInputField name="code" length={4} />}
-        <Button type="submit">{isSuccess ? "Войти" : "Получить код"}</Button>
+        <Button type="submit">{isSuccess ? 'Войти' : 'Получить код'}</Button>
       </Stack>
     </FormContainer>
   );

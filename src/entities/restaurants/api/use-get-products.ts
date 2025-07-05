@@ -1,5 +1,5 @@
-import { api } from "@shared/api";
-import { useQuery } from "@tanstack/react-query";
+import { api } from '@shared/api';
+import { useQuery } from '@tanstack/react-query';
 
 export const useGetProducts = (params: {
   seoUrl: string;
@@ -7,7 +7,7 @@ export const useGetProducts = (params: {
   pageNumber: string;
 }) => {
   return useQuery({
-    queryKey: ["products", params],
+    queryKey: ['products', params],
     queryFn: () => api.products.productsControllerGetProductByRestId(params),
   });
 };
