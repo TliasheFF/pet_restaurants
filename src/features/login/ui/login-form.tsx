@@ -1,7 +1,8 @@
-import { Alert, Box, Button, FormHelperText, Stack } from '@mui/material';
+import { Box, Button, FormHelperText, Stack } from '@mui/material';
+import { useNotification } from '@shared/ui/notification';
 import IMask from 'imask';
 import { MuiOtpInput } from 'mui-one-time-password-input';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import {
   Controller,
   FormContainer,
@@ -43,7 +44,7 @@ const OtpInputField = ({ name, length }: { name: string; length: number }) => {
 };
 
 export const LoginForm = () => {
-  const [error, setError] = useState<string | null>(null);
+  const { showNotification } = useNotification();
 
   const {
     generateCode,
@@ -51,7 +52,7 @@ export const LoginForm = () => {
     error: codeError,
     errorText: codeErrorText,
   } = useGenerateLoginCode();
-  const { onLogin, error: loginError, errorText: loginErrorText } = useLogin();
+  const { onLogin } = useLogin();
 
   const onSubmit = (values: { phone: string; code: string }) => {
     if (isSuccess) {
@@ -70,13 +71,14 @@ export const LoginForm = () => {
   };
 
   useEffect(() => {
-    setError(codeErrorText || loginErrorText);
-  }, [codeError, loginError]);
+    if (codeError) {
+      showNotification(codeErrorText);
+    }
+  }, [codeError]);
 
   return (
     <FormContainer defaultValues={{ phone: '', code: '' }} onSuccess={onSubmit}>
       <Stack spacing={2}>
-        {error && <Alert severity="error">{error}</Alert>}
         <TextFieldElement
           required
           autoFocus
