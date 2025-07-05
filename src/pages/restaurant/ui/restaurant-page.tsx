@@ -8,8 +8,6 @@ import { BaseItemsGrid } from '@widgets/base-items-grid';
 import { useState } from 'react';
 import { Link, useParams } from 'react-router';
 
-const PER_PAGE = 6;
-
 export const RestaurantPage = () => {
   const [page, setPage] = useState(1);
   const { seoUrl } = useParams();
@@ -19,15 +17,13 @@ export const RestaurantPage = () => {
   // const {} = useGetCategories({ id: String(restaurantData?.data.id) ?? "" });
   const { data: productsData, isLoading: isProductsLoading } = useGetProducts({
     seoUrl: seoUrl ?? '',
-    pageSize: String(PER_PAGE),
+    pageSize: String(6),
     pageNumber: String(page - 1),
   });
 
   if (isProductsLoading) {
     return <Loader isOpen={isProductsLoading} text="Загружаем блюда..." />;
   }
-
-  const count = Math.ceil(productsData?.data?.totalItems! / PER_PAGE);
 
   return (
     <>
@@ -51,13 +47,11 @@ export const RestaurantPage = () => {
       </BaseItemsGrid>
 
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        {productsData?.data?.totalItems! > PER_PAGE && (
-          <Pagination
-            count={count}
-            page={page}
-            onChange={(_, pageNumber) => setPage(pageNumber)}
-          />
-        )}
+        <Pagination
+          count={productsData?.data?.totalPages}
+          page={page}
+          onChange={(_, pageNumber) => setPage(pageNumber)}
+        />
       </div>
     </>
   );

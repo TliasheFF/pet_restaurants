@@ -6,13 +6,11 @@ import { Loader } from '@shared/ui/loader';
 import { BaseItemsGrid } from '@widgets/base-items-grid';
 import { useEffect, useState } from 'react';
 
-const PER_PAGE = 6;
-
 export const RestaurantsPage = () => {
   const [page, setPage] = useState(1);
 
   const { data, isLoading, isError } = useGetAllRestaurants({
-    pageSize: String(PER_PAGE),
+    pageSize: String(6),
     pageNumber: String(page - 1),
   });
   const { data: dataSource } = data ?? {};
@@ -39,8 +37,6 @@ export const RestaurantsPage = () => {
     );
   }
 
-  const count = Math.ceil(dataSource?.totalItems! / PER_PAGE);
-
   return (
     <>
       <BaseItemsGrid>
@@ -50,13 +46,11 @@ export const RestaurantsPage = () => {
       </BaseItemsGrid>
 
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        {dataSource?.totalItems! > PER_PAGE && (
-          <Pagination
-            count={count}
-            page={page}
-            onChange={(_, pageNumber) => setPage(pageNumber)}
-          />
-        )}
+        <Pagination
+          count={dataSource?.totalPages}
+          page={page}
+          onChange={(_, pageNumber) => setPage(pageNumber)}
+        />
       </div>
     </>
   );
