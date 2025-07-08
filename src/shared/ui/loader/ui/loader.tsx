@@ -1,12 +1,6 @@
 import { Backdrop, Box, CircularProgress, Typography } from '@mui/material';
-import type { FC } from 'react';
 
-interface LoaderProps {
-  isOpen: boolean;
-  text: string;
-}
-
-export const Loader: FC<LoaderProps> = (props) => {
+export const Loader = (props: { isOpen: boolean; text?: string }) => {
   const { isOpen, text = 'Загрузка...' } = props;
 
   return (

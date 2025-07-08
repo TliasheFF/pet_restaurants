@@ -1,3 +1,5 @@
+import { Box } from '@mui/material';
+
 export const CartPage = () => {
-  return <div>CartPage in dev</div>;
+  return <Box>CartPage in dev</Box>;
 };

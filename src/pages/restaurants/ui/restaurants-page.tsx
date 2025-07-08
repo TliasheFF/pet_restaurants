@@ -1,6 +1,6 @@
 import { RestaurantCard } from '@entities/restaurants';
 import { useGetAllRestaurants } from '@entities/restaurants/api/use-get-all-restaurants';
-import { Pagination } from '@mui/material';
+import { Box, Pagination } from '@mui/material';
 import type { Restaurant } from '@shared/api/dto/Api';
 import { Loader } from '@shared/ui/loader';
 import { BaseItemsGrid } from '@widgets/base-items-grid';
@@ -31,9 +31,9 @@ export const RestaurantsPage = () => {
 
   if (isError) {
     return (
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <Box textAlign="center" marginBlockStart={'50vh'}>
         Произошла ошибка загрузки. Обновите страницу или попробуйте зайти позже
-      </div>
+      </Box>
     );
   }
 
@@ -45,13 +45,13 @@ export const RestaurantsPage = () => {
         ))}
       </BaseItemsGrid>
 
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <Box display="flex" justifyContent="center">
         <Pagination
           count={dataSource?.totalPages}
           page={page}
           onChange={(_, pageNumber) => setPage(pageNumber)}
         />
-      </div>
+      </Box>
     </>
   );
 };

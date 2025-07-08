@@ -7,6 +7,7 @@ import {
   Scale,
 } from '@mui/icons-material';
 import {
+  Box,
   Button,
   Card,
   CardContent,
@@ -42,8 +43,8 @@ export const ProductCard = (props: { product: Product }) => {
           {name}
         </Typography>
 
-        <div
-          style={{
+        <Box
+          sx={{
             display: 'flex',
             alignItems: 'center',
             backgroundColor: '#f1f1f1',
@@ -56,27 +57,25 @@ export const ProductCard = (props: { product: Product }) => {
             {price}
           </Typography>
           <CurrencyRuble fontSize="small" />
-        </div>
+        </Box>
 
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <div
-            style={{ display: 'flex', gap: 10, color: 'gray', fontSize: 12 }}
-          >
+        <Box display="flex" justifyContent="space-between">
+          <Box display="flex" gap={2} fontSize={12} color={'#666'}>
             <Tooltip title="Вес">
-              <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+              <Box display="flex" alignItems="center" gap={1}>
                 <Scale />
                 <span>{weight}</span>
-              </div>
+              </Box>
             </Tooltip>
             <Tooltip title="Количество калорий">
-              <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+              <Box display="flex" alignItems="center" gap={1}>
                 <BatteryChargingFull />
                 <span>{calories}</span>
-              </div>
+              </Box>
             </Tooltip>
-          </div>
+          </Box>
 
-          <div>
+          <Box>
             {!Boolean(count) && (
               <Button
                 variant="contained"
@@ -87,7 +86,7 @@ export const ProductCard = (props: { product: Product }) => {
               </Button>
             )}
             {!!count && (
-              <div>
+              <Box>
                 <IconButton onClick={() => setCount((prev) => prev - 1)}>
                   <Remove />
                 </IconButton>
@@ -95,10 +94,10 @@ export const ProductCard = (props: { product: Product }) => {
                 <IconButton onClick={handleAdd}>
                   <Add />
                 </IconButton>
-              </div>
+              </Box>
             )}
-          </div>
-        </div>
+          </Box>
+        </Box>
       </CardContent>
     </Card>
   );

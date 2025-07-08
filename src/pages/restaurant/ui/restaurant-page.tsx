@@ -2,7 +2,7 @@ import { ProductCard } from '@entities/restaurants';
 import { useGetProducts } from '@entities/restaurants/api/use-get-products';
 import { useGetRestaurant } from '@entities/restaurants/api/use-get-restaurant';
 import { ArrowBack } from '@mui/icons-material';
-import { Pagination, Tooltip, Typography } from '@mui/material';
+import { Box, Pagination, Tooltip, Typography } from '@mui/material';
 import { Loader } from '@shared/ui/loader';
 import { BaseItemsGrid } from '@widgets/base-items-grid';
 import { useState } from 'react';
@@ -27,9 +27,7 @@ export const RestaurantPage = () => {
 
   return (
     <>
-      <div
-        style={{ marginTop: 20, display: 'flex', alignItems: 'end', gap: 10 }}
-      >
+      <Box display="flex" alignItems="center" gap={1} marginBlockStart={2}>
         <Tooltip title="Назад">
           <Link to={'/'} style={{ color: 'inherit' }}>
             <ArrowBack />
@@ -38,7 +36,7 @@ export const RestaurantPage = () => {
         <Typography variant="h6" component="span">
           {restaurantData?.data.name}
         </Typography>
-      </div>
+      </Box>
 
       <BaseItemsGrid>
         {productsData?.data.items.map((product) => (
@@ -46,13 +44,13 @@ export const RestaurantPage = () => {
         ))}
       </BaseItemsGrid>
 
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <Box display="flex" justifyContent="center">
         <Pagination
           count={productsData?.data?.totalPages}
           page={page}
           onChange={(_, pageNumber) => setPage(pageNumber)}
         />
-      </div>
+      </Box>
     </>
   );
 };

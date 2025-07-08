@@ -1,13 +1,17 @@
-import { Button, Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import { useNavigate } from 'react-router';
-
-import styles from './not-found-page.module.css';
 
 export const NotFoundPage = () => {
   const navigate = useNavigate();
 
   return (
-    <div className={styles['not-found-page']}>
+    <Box
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
+      height="100vh"
+    >
       <Typography variant="h3">Ошибка</Typography>
       <Typography
         variant="h6"
@@ -22,6 +26,6 @@ export const NotFoundPage = () => {
       <Button variant="contained" onClick={() => navigate('/')}>
         На главную
       </Button>
-    </div>
+    </Box>
   );
 };

@@ -1,5 +1,15 @@
-import styles from './base-items-grid.module.css';
+import { Box } from '@mui/material';
 
 export const BaseItemsGrid = (props: { children: React.ReactNode }) => {
-  return <div className={styles['base-items-grid']}>{props.children}</div>;
+  return (
+    <Box
+      paddingY={2}
+      display="flex"
+      flexWrap="wrap"
+      justifyContent="space-evenly"
+      gap={2}
+    >
+      {props.children}
+    </Box>
+  );
 };

@@ -1,3 +1,5 @@
+import { Box } from '@mui/material';
+
 export const OrdersPage = () => {
-  return <div>OrdersPage in dev</div>;
+  return <Box>OrdersPage in dev</Box>;
 };
