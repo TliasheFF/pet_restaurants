@@ -3,7 +3,6 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
   ThemeProvider,
 } from '@mui/material';
@@ -80,9 +79,7 @@ export const Modal = (props: ModalProps) => {
         onTransitionExited={() => afterOpenChange?.(false)}
       >
         {title && <DialogTitle>{title}</DialogTitle>}
-        <DialogContent>
-          <DialogContentText>{content}</DialogContentText>
-        </DialogContent>
+        <DialogContent>{content}</DialogContent>
         <DialogActions>
           {showCancelButton && (
             <Button

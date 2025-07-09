@@ -52,6 +52,7 @@ export const ProfileMenu = () => {
               okText: 'Выйти',
               cancelText: 'Отменить',
               onOk: handleConfirmLogout,
+              onCancel: () => handleCloseMenu(),
             });
           }}
         >
