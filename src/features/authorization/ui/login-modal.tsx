@@ -40,7 +40,7 @@ export const LoginModal: FC<LoginModalProps> = (props) => {
       }}
     >
       <Box sx={boxStyles}>
-        <LoginForm />
+        <LoginForm onClose={handleClose} />
       </Box>
     </Modal>
   );

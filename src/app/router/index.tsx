@@ -1,4 +1,4 @@
-import { AuthProvider } from '@app/providers';
+import { AuthProvider } from '@features/authorization';
 import { CartPage } from '@pages/cart';
 import { NotFoundPage } from '@pages/not-found';
 import { OrdersPage } from '@pages/orders';

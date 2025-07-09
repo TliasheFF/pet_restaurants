@@ -1,1 +1,1 @@
-export { AuthProvider } from './auth-provider';
+export { QueryPovider } from './query-provider';

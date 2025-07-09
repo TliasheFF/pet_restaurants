@@ -1,6 +1,7 @@
 import { Box, Button, FormHelperText, Stack } from '@mui/material';
 import IMask from 'imask';
 import { MuiOtpInput } from 'mui-one-time-password-input';
+import { useEffect } from 'react';
 import {
   Controller,
   FormContainer,
@@ -41,9 +42,17 @@ const OtpInputField = ({ name, length }: { name: string; length: number }) => {
   );
 };
 
-export const LoginForm = () => {
+// раскидать на отдельные шаги ввод номера и ввод кода
+export const LoginForm = (props: { onClose?: () => void }) => {
+  const { onClose } = props;
   const { mutate: generateCode, isSuccess } = useGenerateLoginCode();
-  const { mutate: onLogin } = useLogin();
+  const { mutate: onLogin, isSuccess: isLoginSuccess } = useLogin();
+
+  useEffect(() => {
+    if (isLoginSuccess) {
+      onClose?.();
+    }
+  }, [isLoginSuccess, onClose]);
 
   const onSubmit = (values: { phone: string; code: string }) => {
     if (isSuccess) {

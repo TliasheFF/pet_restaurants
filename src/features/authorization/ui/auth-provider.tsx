@@ -1,4 +1,4 @@
-import { LoginForm } from '@features/login/ui/login-form';
+import { LoginForm } from '@features/authorization/ui/login-form';
 import { Paper, Typography } from '@mui/material';
 import { useUserData } from '@shared/store/user-data';
 
