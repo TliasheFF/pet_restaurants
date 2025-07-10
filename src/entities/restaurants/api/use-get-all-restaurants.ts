@@ -8,5 +8,6 @@ export const useGetAllRestaurants = (params: {
   return useQuery({
     queryKey: ['restaurants', params],
     queryFn: () => api.restaurant.restaurantControllerGetAllRestaurants(params),
+    select: (data) => data.data,
   });
 };

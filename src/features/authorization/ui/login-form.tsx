@@ -43,14 +43,18 @@ const OtpInputField = ({ name, length }: { name: string; length: number }) => {
 };
 
 // раскидать на отдельные шаги ввод номера и ввод кода
-export const LoginForm = (props: { onClose?: () => void }) => {
-  const { onClose } = props;
+export const LoginForm = (props: {
+  onClose?: () => void;
+  callBackAfterLogin?: () => void;
+}) => {
+  const { onClose, callBackAfterLogin } = props;
   const { mutate: generateCode, isSuccess } = useGenerateLoginCode();
   const { mutate: onLogin, isSuccess: isLoginSuccess } = useLogin();
 
   useEffect(() => {
     if (isLoginSuccess) {
       onClose?.();
+      callBackAfterLogin?.();
     }
   }, [isLoginSuccess, onClose]);
 

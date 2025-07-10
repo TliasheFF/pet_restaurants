@@ -1,3 +1,4 @@
+import { QueryPovider } from '@app/providers';
 import {
   Button,
   Dialog,
@@ -64,43 +65,45 @@ export const Modal = (props: ModalProps) => {
   } = props;
 
   return (
-    <ThemeProvider theme={theme}>
-      <Dialog
-        open={isOpen}
-        onClose={onCancelButtonClick}
-        maxWidth={false}
-        sx={{
-          style: {
-            width,
-            zIndex,
-          },
-        }}
-        onTransitionEnter={() => afterOpenChange?.(true)}
-        onTransitionExited={() => afterOpenChange?.(false)}
-      >
-        {title && <DialogTitle>{title}</DialogTitle>}
-        <DialogContent>{content}</DialogContent>
-        <DialogActions>
-          {showCancelButton && (
+    <QueryPovider>
+      <ThemeProvider theme={theme}>
+        <Dialog
+          open={isOpen}
+          onClose={onCancelButtonClick}
+          maxWidth={false}
+          sx={{
+            style: {
+              width,
+              zIndex,
+            },
+          }}
+          onTransitionEnter={() => afterOpenChange?.(true)}
+          onTransitionExited={() => afterOpenChange?.(false)}
+        >
+          {title && <DialogTitle>{title}</DialogTitle>}
+          <DialogContent>{content}</DialogContent>
+          <DialogActions>
+            {showCancelButton && (
+              <Button
+                onClick={onCancelButtonClick}
+                variant="outlined"
+                color="primary"
+              >
+                {cancelText}
+              </Button>
+            )}
             <Button
-              onClick={onCancelButtonClick}
-              variant="outlined"
+              onClick={onSubmitButtonClick}
+              variant="contained"
               color="primary"
+              disabled={submitButtonDisabled}
             >
-              {cancelText}
+              {okText}
             </Button>
-          )}
-          <Button
-            onClick={onSubmitButtonClick}
-            variant="contained"
-            color="primary"
-            disabled={submitButtonDisabled}
-          >
-            {okText}
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </ThemeProvider>
+          </DialogActions>
+        </Dialog>
+      </ThemeProvider>
+    </QueryPovider>
   );
 };
 
@@ -166,7 +169,6 @@ const ModalWrapper = (props: OpenModalProps) => {
 
 const openModal = (props: OpenModalProps) => {
   const div = document.createElement('div');
-  document.body.appendChild(div);
   const root = ReactDOM.createRoot(div);
 
   const handleUnmount = () => {
@@ -174,5 +176,11 @@ const openModal = (props: OpenModalProps) => {
     div.remove();
   };
 
-  root.render(<ModalWrapper {...props} onUnmount={handleUnmount} />);
+  root.render(
+    <ModalWrapper
+      key={`modal_${Date.now()}`}
+      {...props}
+      onUnmount={handleUnmount}
+    />,
+  );
 };

@@ -6,5 +6,7 @@ export const useGetRestaurant = (seoUrl: string) => {
     queryKey: ['restaurant', { seoUrl }],
     queryFn: () =>
       api.restaurant.restaurantControllerGetRestaurantById({ seoUrl }),
+    select: (data) => data.data,
+    enabled: !!seoUrl,
   });
 };
