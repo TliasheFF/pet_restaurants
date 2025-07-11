@@ -1,13 +1,7 @@
 import { ProfileMenu } from '@entities/profile-menu';
 import { LoginModal } from '@features/authorization';
-import { Login, ShoppingCart, Store } from '@mui/icons-material';
-import {
-  AppBar,
-  IconButton,
-  Toolbar,
-  Tooltip,
-  Typography,
-} from '@mui/material';
+import { Home, Login, ShoppingCart } from '@mui/icons-material';
+import { AppBar, Box, IconButton, Toolbar, Tooltip } from '@mui/material';
 import { useUserData } from '@shared/store/user-data';
 import { useState } from 'react';
 import { Link } from 'react-router';
@@ -20,15 +14,11 @@ export const Header = () => {
     <>
       <AppBar position="sticky">
         <Toolbar>
-          <Typography
-            variant="h6"
-            component="span"
-            sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', gap: 1 }}
-          >
+          <Box sx={{ flexGrow: 1 }}>
             <Link to="/" style={{ color: 'inherit' }}>
-              <Store />
+              <Home />
             </Link>
-          </Typography>
+          </Box>
 
           <Link to="/cart" style={{ color: 'inherit' }}>
             <Tooltip title="Корзина">

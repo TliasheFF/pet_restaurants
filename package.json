@@ -1,7 +1,7 @@
 {
   "name": "restaurants",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -17,7 +17,9 @@
     "@mui/material": "7.1.0",
     "@tanstack/react-query": "5.76.1",
     "@tanstack/react-query-devtools": "5.76.1",
+    "@toolpad/core": "0.16.0",
     "axios": "1.9.0",
+    "dayjs": "1.11.13",
     "js-cookie": "3.0.5",
     "mui-one-time-password-input": "5.0.0",
     "react": "19.1.0",

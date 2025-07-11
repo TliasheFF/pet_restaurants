@@ -5,38 +5,52 @@ import {
   useGetRestaurant,
 } from '@entities/restaurants';
 import { ArrowBack } from '@mui/icons-material';
-import { Box, Pagination, Tab, Tabs, Tooltip, Typography } from '@mui/material';
-import { Loader } from '@shared/ui/loader';
+import { Box, Tab, Tabs, Tooltip, Typography } from '@mui/material';
+import { Pagination } from '@shared/ui/pagination';
 import { BaseItemsGrid } from '@widgets/base-items-grid';
 import { useState } from 'react';
 import { Link, useParams } from 'react-router';
 
 export const RestaurantPage = () => {
   const [page, setPage] = useState(1);
-  const [activeTabId, setActiveTabId] = useState(0);
+  const [activeCategoryId, setActiveCategoryId] = useState(0);
   const { seoUrl = '' } = useParams();
 
   const handleTabChange = (_: React.SyntheticEvent, id: number) => {
-    setActiveTabId(id);
+    setActiveCategoryId(id);
   };
 
   const { data: restaurantData } = useGetRestaurant(seoUrl);
-  const { data: productsData, isLoading: isProductsLoading } = useGetProducts({
+  const {
+    data: productsData,
+    isLoading: isProductsLoading,
+    isError,
+  } = useGetProducts({
     seoUrl,
     restaurantId: Number(restaurantData?.id),
     pageSize: String(6),
     pageNumber: String(page - 1),
-    categoryId: String(activeTabId),
+    categoryId: String(activeCategoryId),
   });
   const { data: categories } = useGetCategories(restaurantData?.id);
 
-  if (isProductsLoading) {
-    return <Loader isOpen={isProductsLoading} text="Загружаем блюда..." />;
+  if (isError) {
+    return (
+      <Box textAlign="center" marginBlockStart={'50vh'}>
+        Произошла ошибка загрузки. Обновите страницу или попробуйте зайти позже
+      </Box>
+    );
   }
 
   return (
     <>
-      <Box display="flex" alignItems="end" gap={1} marginBlockStart={2}>
+      <Box
+        display="flex"
+        alignItems="end"
+        gap={1}
+        marginBlockStart={2}
+        marginLeft={2}
+      >
         <Tooltip title="Назад">
           <Link to={'/'} style={{ color: 'inherit' }}>
             <ArrowBack />
@@ -47,32 +61,37 @@ export const RestaurantPage = () => {
         </Typography>
       </Box>
 
-      <Box display="flex" alignItems="end" gap={1} marginBlockStart={2}>
+      {!!categories?.length && (
         <Tabs
-          value={activeTabId}
+          value={activeCategoryId}
           onChange={handleTabChange}
-          aria-label="product category"
+          variant="scrollable"
+          scrollButtons
+          allowScrollButtonsMobile
+          sx={{ mt: 2 }}
         >
-          <Tab label="Все" />
-          {categories?.map((category) => (
-            <Tab value={category.categoryId} label={category.categoryName} />
+          <Tab key="all" label="Все" />
+          {categories.map((category) => (
+            <Tab
+              key={category.categoryId}
+              value={category.categoryId}
+              label={category.categoryName}
+            />
           ))}
         </Tabs>
-      </Box>
+      )}
 
-      <BaseItemsGrid>
+      <BaseItemsGrid loading={isProductsLoading}>
         {productsData?.items.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
       </BaseItemsGrid>
 
-      <Box display="flex" justifyContent="center">
-        <Pagination
-          count={productsData?.totalPages}
-          page={page}
-          onChange={(_, pageNumber) => setPage(pageNumber)}
-        />
-      </Box>
+      <Pagination
+        page={page}
+        totalPages={productsData?.totalPages}
+        onChange={setPage}
+      />
     </>
   );
 };

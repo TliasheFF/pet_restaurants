@@ -17,6 +17,7 @@ import {
   Typography,
 } from '@mui/material';
 import type { Product } from '@shared/api/dto/Api';
+import { MAIN_COLORS } from '@shared/config/theme';
 import { useState } from 'react';
 
 const cardStyles = {
@@ -47,7 +48,7 @@ export const ProductCard = (props: { product: Product }) => {
           sx={{
             display: 'flex',
             alignItems: 'center',
-            backgroundColor: '#f1f1f1',
+            backgroundColor: MAIN_COLORS.normalSuperLight,
             padding: '0 10px',
             maxWidth: 'fit-content',
             borderRadius: 15,
@@ -60,7 +61,12 @@ export const ProductCard = (props: { product: Product }) => {
         </Box>
 
         <Box display="flex" justifyContent="space-between">
-          <Box display="flex" gap={2} fontSize={12} color={'#666'}>
+          <Box
+            display="flex"
+            gap={2}
+            fontSize={12}
+            color={MAIN_COLORS.disabledDark}
+          >
             <Tooltip title="Вес">
               <Box display="flex" alignItems="center" gap={1}>
                 <Scale />

@@ -1,13 +1,14 @@
 import { AccountCircle } from '@mui/icons-material';
 import { IconButton, Menu, MenuItem, Tooltip } from '@mui/material';
 import { useUserData } from '@shared/store/user-data';
-import { Modal } from '@shared/ui/modal';
+import { useDialogs } from '@toolpad/core/useDialogs';
 import { type MouseEvent, useState } from 'react';
 import { useNavigate } from 'react-router';
 
 export const ProfileMenu = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const navigate = useNavigate();
+  const dialogs = useDialogs();
   const { setIsAuthorized } = useUserData();
   const open = Boolean(anchorEl);
 
@@ -31,12 +32,7 @@ export const ProfileMenu = () => {
           <AccountCircle />
         </IconButton>
       </Tooltip>
-      <Menu
-        id="basic-menu"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleCloseMenu}
-      >
+      <Menu anchorEl={anchorEl} open={open} onClose={handleCloseMenu}>
         <MenuItem
           onClick={() => {
             navigate('/orders');
@@ -46,14 +42,22 @@ export const ProfileMenu = () => {
           Мои заказы
         </MenuItem>
         <MenuItem
-          onClick={() => {
-            Modal.confirm({
-              content: 'Вы уверены, что хотите выйти?',
-              okText: 'Выйти',
-              cancelText: 'Отменить',
-              onOk: handleConfirmLogout,
-              onCancel: () => handleCloseMenu(),
-            });
+          onClick={async () => {
+            const confirmed = await dialogs.confirm(
+              'Вы уверены что хотите выйти?',
+              {
+                title: 'Подтверждение',
+                okText: 'Выйти',
+                cancelText: 'Отменить',
+                severity: 'warning',
+              },
+            );
+
+            if (confirmed) {
+              handleConfirmLogout();
+            } else {
+              handleCloseMenu();
+            }
           }}
         >
           Выйти

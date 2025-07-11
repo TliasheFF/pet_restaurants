@@ -1,6 +1,16 @@
 import { Box } from '@mui/material';
+import { Loader } from '@shared/ui/loader';
 
-export const BaseItemsGrid = (props: { children: React.ReactNode }) => {
+export const BaseItemsGrid = (props: {
+  loading?: boolean;
+  children: React.ReactNode;
+}) => {
+  const { loading, children } = props;
+
+  if (loading) {
+    return <Loader isOpen={loading} />;
+  }
+
   return (
     <Box
       paddingY={2}
@@ -9,7 +19,7 @@ export const BaseItemsGrid = (props: { children: React.ReactNode }) => {
       justifyContent="space-evenly"
       gap={2}
     >
-      {props.children}
+      {children}
     </Box>
   );
 };

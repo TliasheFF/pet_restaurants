@@ -623,10 +623,18 @@ export interface GetOrderDto {
   /** @example "test@mail.ru" */
   email: string;
   /** @example "string" */
-  createdAt: object;
+  createdAt: string;
   /** @example 0 */
   status: number;
   products: OrderProductDto[];
+}
+
+export interface PaginatedGetOrderDto {
+  currentPage: number;
+  totalPages: number;
+  pageSize: number;
+  totalItems: number;
+  items: GetOrderDto[];
 }
 
 export interface User {
@@ -715,7 +723,7 @@ export interface GetDashboardOrderDto {
   /** @example "test@mail.ru" */
   email: string;
   /** @example "string" */
-  createdAt: object;
+  createdAt: string;
   /** @example 0 */
   status: number;
   products: OrderProductDto[];
@@ -1855,7 +1863,7 @@ export class Api<
       },
       params: RequestParams = {},
     ) =>
-      this.request<GetOrderDto[], any>({
+      this.request<PaginatedGetOrderDto, any>({
         path: `/orders/get-orders`,
         method: "GET",
         query: query,

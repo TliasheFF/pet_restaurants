@@ -8,6 +8,12 @@ export const useGetAllRestaurants = (params: {
   return useQuery({
     queryKey: ['restaurants', params],
     queryFn: () => api.restaurant.restaurantControllerGetAllRestaurants(params),
-    select: (data) => data.data,
+    select: (data) => {
+      return {
+        // временно. Удалить лишние рестораны в БД
+        items: data.data.items.filter((item) => item.enabled),
+        totalPages: data.data.totalPages,
+      };
+    },
   });
 };
