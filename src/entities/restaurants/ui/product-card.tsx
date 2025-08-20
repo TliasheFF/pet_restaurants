@@ -20,11 +20,6 @@ import {
 import { type Product } from '@shared/api/dto/Api';
 import { MAIN_COLORS } from '@shared/config/theme';
 
-const cardStyles = {
-  width: 350,
-  ':hover': { scale: 1.01, transition: '0.5s' },
-};
-
 export const ProductCard = (props: { product: Product }) => {
   const {
     product: { name, image, price, weight, calories, id, restaurantId },
@@ -36,7 +31,12 @@ export const ProductCard = (props: { product: Product }) => {
   )?.quantity;
 
   return (
-    <Card sx={{ ...cardStyles }}>
+    <Card
+      sx={{
+        width: 350,
+        ':hover': { scale: 1.01, transition: '0.5s' },
+      }}
+    >
       <CardMedia image={image} title={name} sx={{ height: 200 }} />
       <CardContent sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
         <Typography variant="h6" component="span">
