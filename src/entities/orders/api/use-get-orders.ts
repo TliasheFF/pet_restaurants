@@ -1,11 +1,11 @@
-import { api } from '@shared/api';
+import { apiClient } from '@shared/api';
 import { useQuery } from '@tanstack/react-query';
 
 export const useGetOrders = () => {
   return useQuery({
     queryKey: ['orders'],
     queryFn: () =>
-      api.orders.ordersControllerGetOrderOfUser({
+      apiClient.orders.ordersControllerGetOrderOfUser({
         pageNumber: '0',
         pageSize: '1000',
       }),

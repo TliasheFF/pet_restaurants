@@ -1,4 +1,4 @@
-import { api } from '@shared/api';
+import { apiClient } from '@shared/api';
 import { useUserData } from '@shared/store/user-data';
 import { useMutation } from '@tanstack/react-query';
 
@@ -7,7 +7,7 @@ export const useLogin = () => {
 
   return useMutation({
     mutationFn: (params: { phone: string; code: string }) =>
-      api.identity.authControllerAuthByPhone(params),
+      apiClient.identity.authControllerAuthByPhone(params),
     onSuccess: (data) => {
       localStorage.setItem('accessToken', data.data.accessToken);
       localStorage.setItem('refreshToken', data.data.refreshToken);

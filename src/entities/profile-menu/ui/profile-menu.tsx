@@ -25,6 +25,21 @@ export const ProfileMenu = () => {
     localStorage.removeItem('refreshToken');
   };
 
+  const handleCloseClick = async () => {
+    const confirmed = await dialogs.confirm('Вы уверены что хотите выйти?', {
+      title: 'Подтверждение',
+      okText: 'Выйти',
+      cancelText: 'Отменить',
+      severity: 'warning',
+    });
+
+    if (confirmed) {
+      handleConfirmLogout();
+    } else {
+      handleCloseMenu();
+    }
+  };
+
   return (
     <>
       <Tooltip title="Профиль">
@@ -41,27 +56,7 @@ export const ProfileMenu = () => {
         >
           Мои заказы
         </MenuItem>
-        <MenuItem
-          onClick={async () => {
-            const confirmed = await dialogs.confirm(
-              'Вы уверены что хотите выйти?',
-              {
-                title: 'Подтверждение',
-                okText: 'Выйти',
-                cancelText: 'Отменить',
-                severity: 'warning',
-              },
-            );
-
-            if (confirmed) {
-              handleConfirmLogout();
-            } else {
-              handleCloseMenu();
-            }
-          }}
-        >
-          Выйти
-        </MenuItem>
+        <MenuItem onClick={handleCloseClick}>Выйти</MenuItem>
       </Menu>
     </>
   );

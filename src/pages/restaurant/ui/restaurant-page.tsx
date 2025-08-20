@@ -1,11 +1,21 @@
+import { useGetCartByRestaurantId } from '@entities/cart';
 import {
   ProductCard,
   useGetCategories,
   useGetProducts,
   useGetRestaurant,
 } from '@entities/restaurants';
-import { ArrowBack } from '@mui/icons-material';
-import { Box, Tab, Tabs, Tooltip, Typography } from '@mui/material';
+import { useUserCart } from '@features/user-cart';
+import { ArrowBack, ShoppingCart } from '@mui/icons-material';
+import {
+  Badge,
+  Box,
+  IconButton,
+  Tab,
+  Tabs,
+  Tooltip,
+  Typography,
+} from '@mui/material';
 import { Pagination } from '@shared/ui/pagination';
 import { BaseItemsGrid } from '@widgets/base-items-grid';
 import { useState } from 'react';
@@ -33,6 +43,14 @@ export const RestaurantPage = () => {
     categoryId: String(activeCategoryId),
   });
   const { data: categories } = useGetCategories(restaurantData?.id);
+  const { cart } = useUserCart(restaurantData?.id || 0);
+
+  const productsInCartCount = cart?.products.reduce(
+    (acc, item) => acc + item.quantity,
+    0,
+  );
+
+  console.log({ cart, productsInCartCount });
 
   if (isError) {
     return (
@@ -47,18 +65,32 @@ export const RestaurantPage = () => {
       <Box
         display="flex"
         alignItems="end"
-        gap={1}
-        marginBlockStart={2}
-        marginLeft={2}
+        justifyContent={'space-between'}
+        margin={2}
+        height={40}
       >
-        <Tooltip title="Назад">
-          <Link to={'/'} style={{ color: 'inherit' }}>
-            <ArrowBack />
+        <Box display="flex" alignItems="end" gap={1}>
+          <Tooltip title="Назад">
+            <Link to={'/'} style={{ color: 'inherit' }}>
+              <ArrowBack />
+            </Link>
+          </Tooltip>
+          <Typography variant="h6" component="span">
+            {restaurantData?.name}
+          </Typography>
+        </Box>
+
+        {!!productsInCartCount && (
+          <Link to="/cart" style={{ color: 'inherit' }}>
+            <Tooltip title="Корзина">
+              <IconButton color="inherit">
+                <Badge badgeContent={productsInCartCount} color="primary">
+                  <ShoppingCart />
+                </Badge>
+              </IconButton>
+            </Tooltip>
           </Link>
-        </Tooltip>
-        <Typography variant="h6" component="span">
-          {restaurantData?.name}
-        </Typography>
+        )}
       </Box>
 
       {!!categories?.length && (

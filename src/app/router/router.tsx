@@ -1,4 +1,3 @@
-import { AuthProvider } from '@features/authorization';
 import { CartPage } from '@pages/cart';
 import { NotFoundPage } from '@pages/not-found';
 import { OrdersPage } from '@pages/orders';
@@ -17,19 +16,11 @@ export const router = createBrowserRouter([
       { path: 'restaurant/:seoUrl', element: <RestaurantPage /> },
       {
         path: 'cart',
-        element: (
-          <AuthProvider>
-            <CartPage />
-          </AuthProvider>
-        ),
+        element: <CartPage />,
       },
       {
         path: 'orders',
-        element: (
-          <AuthProvider>
-            <OrdersPage />
-          </AuthProvider>
-        ),
+        element: <OrdersPage />,
       },
     ],
   },

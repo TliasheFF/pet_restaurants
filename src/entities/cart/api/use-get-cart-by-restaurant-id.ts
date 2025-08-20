@@ -1,13 +1,11 @@
 import { apiClient } from '@shared/api';
 import { useQuery } from '@tanstack/react-query';
 
-export const useGetCategories = (id?: number) => {
+export const useGetCartByRestaurantId = (id?: number) => {
   return useQuery({
-    queryKey: ['categories', id],
+    queryKey: ['cart', id],
     queryFn: () =>
-      apiClient.category.categoryControllerGetCategoriesByRestaurantId({
-        id: String(id),
-      }),
+      apiClient.cart.cartControllerGetUserCart({ restaurantId: String(id) }),
     select: (data) => data.data,
     enabled: !!id,
   });

@@ -1,3 +1,4 @@
+import { useUserCart } from '@features/user-cart';
 import {
   Add,
   AddShoppingCart,
@@ -16,25 +17,23 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material';
-import type { Product } from '@shared/api/dto/Api';
+import { type Product } from '@shared/api/dto/Api';
 import { MAIN_COLORS } from '@shared/config/theme';
-import { useState } from 'react';
 
 const cardStyles = {
   width: 350,
-  ':hover': { cursor: 'pointer', scale: 1.01, transition: '0.5s' },
+  ':hover': { scale: 1.01, transition: '0.5s' },
 };
 
 export const ProductCard = (props: { product: Product }) => {
-  const [count, setCount] = useState(0);
-
   const {
-    product: { name, image, price, weight, calories },
+    product: { name, image, price, weight, calories, id, restaurantId },
   } = props;
 
-  const handleAdd = () => {
-    setCount((prev) => prev + 1);
-  };
+  const { cart, increment, decrement } = useUserCart(restaurantId);
+  const productQuantity = cart?.products.find(
+    (item) => item.id === id,
+  )?.quantity;
 
   return (
     <Card sx={{ ...cardStyles }}>
@@ -60,7 +59,7 @@ export const ProductCard = (props: { product: Product }) => {
           <CurrencyRuble fontSize="small" />
         </Box>
 
-        <Box display="flex" justifyContent="space-between">
+        <Box display="flex" justifyContent="space-between" height={30}>
           <Box
             display="flex"
             gap={2}
@@ -82,25 +81,24 @@ export const ProductCard = (props: { product: Product }) => {
           </Box>
 
           <Box>
-            {!Boolean(count) && (
+            {!!productQuantity ? (
+              <Box>
+                <IconButton onClick={() => decrement(id)}>
+                  <Remove />
+                </IconButton>
+                {productQuantity}
+                <IconButton onClick={() => increment(id)}>
+                  <Add />
+                </IconButton>
+              </Box>
+            ) : (
               <Button
                 variant="contained"
-                onClick={handleAdd}
+                onClick={() => increment(id)}
                 endIcon={<AddShoppingCart />}
               >
                 Добавить
               </Button>
-            )}
-            {!!count && (
-              <Box>
-                <IconButton onClick={() => setCount((prev) => prev - 1)}>
-                  <Remove />
-                </IconButton>
-                {count}
-                <IconButton onClick={handleAdd}>
-                  <Add />
-                </IconButton>
-              </Box>
             )}
           </Box>
         </Box>

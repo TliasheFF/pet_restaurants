@@ -1,6 +1,6 @@
 import { ProfileMenu } from '@entities/profile-menu';
 import { LoginModal } from '@features/authorization';
-import { Home, Login, ShoppingCart } from '@mui/icons-material';
+import { Home, Login } from '@mui/icons-material';
 import { AppBar, Box, IconButton, Toolbar, Tooltip } from '@mui/material';
 import { useUserData } from '@shared/store/user-data';
 import { useState } from 'react';
@@ -19,14 +19,6 @@ export const Header = () => {
               <Home />
             </Link>
           </Box>
-
-          <Link to="/cart" style={{ color: 'inherit' }}>
-            <Tooltip title="Корзина">
-              <IconButton color="inherit">
-                <ShoppingCart />
-              </IconButton>
-            </Tooltip>
-          </Link>
 
           {isAuthorized ? (
             <ProfileMenu />

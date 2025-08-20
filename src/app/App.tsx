@@ -3,7 +3,7 @@ import { theme } from '@shared/config/theme';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { RouterProvider } from 'react-router';
 
-import { QueryPovider } from './providers';
+import { AuthProvider, QueryPovider } from './providers';
 import { ToolpadProvider } from './providers/toolpad-provider';
 import { router } from './router';
 
@@ -14,8 +14,10 @@ export function App() {
     <ThemeProvider theme={theme}>
       <ToolpadProvider>
         <QueryPovider>
-          <RouterProvider router={router} />
-          <ReactQueryDevtools initialIsOpen={false} />
+          <AuthProvider>
+            <RouterProvider router={router} />
+            <ReactQueryDevtools initialIsOpen={false} />
+          </AuthProvider>
         </QueryPovider>
       </ToolpadProvider>
     </ThemeProvider>

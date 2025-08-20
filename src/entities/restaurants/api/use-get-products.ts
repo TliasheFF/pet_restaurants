@@ -1,4 +1,4 @@
-import { api } from '@shared/api';
+import { apiClient } from '@shared/api';
 import { useQuery } from '@tanstack/react-query';
 
 export const useGetProducts = (params: {
@@ -13,9 +13,13 @@ export const useGetProducts = (params: {
     queryFn: () => {
       switch (params.categoryId) {
         case '0':
-          return api.products.productsControllerGetProductByRestId(params);
+          return apiClient.products.productsControllerGetProductByRestId(
+            params,
+          );
         default: {
-          return api.products.productsControllerGetProductByCategoryId(params);
+          return apiClient.products.productsControllerGetProductByCategoryId(
+            params,
+          );
         }
       }
     },
