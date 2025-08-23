@@ -15,8 +15,6 @@ apiClient.instance.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
-    console.log('Пользователь не автиризован', error);
-
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
 
@@ -40,7 +38,6 @@ apiClient.instance.interceptors.response.use(
 
         return apiClient.instance(originalRequest);
       } catch (refreshError) {
-        console.error('Ошибка обновления токена:', refreshError);
         localStorage.removeItem('accessToken');
         localStorage.removeItem('refreshToken');
         window.location.href = '/';

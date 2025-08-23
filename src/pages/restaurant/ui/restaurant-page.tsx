@@ -1,4 +1,3 @@
-import { useGetCartByRestaurantId } from '@entities/cart';
 import {
   ProductCard,
   useGetCategories,
@@ -49,8 +48,6 @@ export const RestaurantPage = () => {
     (acc, item) => acc + item.quantity,
     0,
   );
-
-  console.log({ cart, productsInCartCount });
 
   if (isError) {
     return (

@@ -1,24 +1,22 @@
-import { Backdrop, Box, CircularProgress, Typography } from '@mui/material';
+import { Box, CircularProgress, Typography } from '@mui/material';
 
 export const Loader = (props: { isOpen: boolean; text?: string }) => {
-  const { isOpen, text = 'Загрузка...' } = props;
+  const { text = 'Загрузка...' } = props;
 
   return (
-    <Backdrop
-      sx={(theme) => ({ color: '#fff', zIndex: theme.zIndex.drawer + 1 })}
-      open={isOpen}
+    <Box
+      sx={{
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
     >
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        <CircularProgress />
-        <Typography sx={{ mt: 2 }}>{text}</Typography>
-      </Box>
-    </Backdrop>
+      <CircularProgress />
+      <Typography sx={{ mt: 2 }}>{text}</Typography>
+    </Box>
   );
 };

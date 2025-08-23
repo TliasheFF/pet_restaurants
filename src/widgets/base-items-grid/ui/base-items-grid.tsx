@@ -8,7 +8,7 @@ export const BaseItemsGrid = (props: {
   const { loading, children } = props;
 
   if (loading) {
-    return <Loader isOpen={loading} />;
+    return <Loader isOpen={true} />;
   }
 
   return (

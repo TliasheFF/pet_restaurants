@@ -1,1 +1,1 @@
-export { LoginModal } from './ui/login-modal';
+export { AuthForm } from './ui/auth-form';
