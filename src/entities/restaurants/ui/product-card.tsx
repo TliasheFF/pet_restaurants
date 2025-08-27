@@ -1,4 +1,3 @@
-import { useUserCart } from '@features/user-cart';
 import {
   Add,
   AddShoppingCart,
@@ -20,15 +19,18 @@ import {
 import { type Product } from '@shared/api/dto/Api';
 import { MAIN_COLORS } from '@shared/config/theme';
 
-export const ProductCard = (props: { product: Product }) => {
+export const ProductCard = (props: {
+  product: Product;
+  addProduct: (id: number) => void;
+  removeProduct: (id: number) => void;
+  productQuantity: number;
+}) => {
   const {
-    product: { name, image, price, weight, calories, id, restaurantId },
+    product: { name, image, price, weight, calories, id },
+    addProduct,
+    removeProduct,
+    productQuantity,
   } = props;
-
-  const { cart, increment, decrement } = useUserCart(restaurantId);
-  const productQuantity = cart?.products.find(
-    (item) => item.id === id,
-  )?.quantity;
 
   return (
     <Card
@@ -83,18 +85,18 @@ export const ProductCard = (props: { product: Product }) => {
           <Box>
             {!!productQuantity ? (
               <Box>
-                <IconButton onClick={() => decrement(id)}>
+                <IconButton onClick={() => removeProduct(id)}>
                   <Remove />
                 </IconButton>
                 {productQuantity}
-                <IconButton onClick={() => increment(id)}>
+                <IconButton onClick={() => addProduct(id)}>
                   <Add />
                 </IconButton>
               </Box>
             ) : (
               <Button
                 variant="contained"
-                onClick={() => increment(id)}
+                onClick={() => addProduct(id)}
                 endIcon={<AddShoppingCart />}
               >
                 Добавить

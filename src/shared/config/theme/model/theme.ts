@@ -5,7 +5,7 @@ import { MAIN_COLORS } from '../constants/main-colors';
 export const theme = createTheme({
   cssVariables: true,
   typography: {
-    fontFamily: ['Montserrat', 'sans-serif'].join(','),
+    fontFamily: 'Montserrat',
   },
   palette: {
     primary: {

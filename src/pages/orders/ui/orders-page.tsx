@@ -9,10 +9,21 @@ export const OrdersPage = () => {
     return <Loader isOpen={isLoading} />;
   }
 
+  if (!data?.items.length) {
+    return (
+      <Box textAlign="center" marginBlockStart="20vh">
+        <Typography variant="h6">У вас пока нет заказов</Typography>
+      </Box>
+    );
+  }
+
   if (isError) {
     return (
       <Box textAlign="center" marginBlockStart="50vh">
-        Произошла ошибка загрузки. Обновите страницу или попробуйте зайти позже
+        <Typography variant="h6">
+          Произошла ошибка загрузки. Обновите страницу или попробуйте зайти
+          позже
+        </Typography>
       </Box>
     );
   }

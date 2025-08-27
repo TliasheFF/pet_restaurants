@@ -10,7 +10,7 @@ export const useUserCart = (restaurantId: number) => {
   const { mutate: addToCart } = useAddToCart(refetch);
   const { mutate: changeQuantity } = useChangeQuantity(refetch);
 
-  const increment = (productId: number) => {
+  const addProduct = (productId: number) => {
     const productQuantity =
       cart?.products.find((item) => item.id === productId)?.quantity || 0;
 
@@ -25,7 +25,7 @@ export const useUserCart = (restaurantId: number) => {
     }
   };
 
-  const decrement = (productId: number) => {
+  const removeProduct = (productId: number) => {
     changeQuantity({
       restaurantId,
       productId,
@@ -35,7 +35,7 @@ export const useUserCart = (restaurantId: number) => {
 
   return {
     cart,
-    increment,
-    decrement,
+    addProduct,
+    removeProduct,
   };
 };

@@ -21,8 +21,14 @@ export const RestaurantCard = (props: { restaurant: Restaurant }) => {
   return (
     <Card sx={{ ...cardStyles }} onClick={handleClick}>
       <CardMedia image={logo} title={name} sx={{ height: 200 }} />
-      <CardContent sx={{ display: 'flex', flexDirection: 'column' }}>
-        <Typography variant="h6" component="span">
+      <CardContent>
+        <Typography
+          variant="h6"
+          component="span"
+          lineHeight={1}
+          textAlign="center"
+          display="block"
+        >
           {name}
         </Typography>
       </CardContent>

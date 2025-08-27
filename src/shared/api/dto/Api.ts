@@ -231,9 +231,9 @@ export interface GetCartDto {
 
 export interface ChangeQuantityDto {
   /** @example 1 */
-  restaurantId: object;
+  restaurantId: number;
   /** @example 1 */
-  productId: object;
+  productId: number;
   action: ChangeQuantityEnum;
 }
 
@@ -557,6 +557,8 @@ export interface Product {
    * @example false
    */
   isDeleted: boolean;
+  /** @example 0 */
+  restaurantId: number;
 }
 
 export interface ProductPaginationResult {
@@ -1014,11 +1016,12 @@ export class Api<
       data: RefreshTokenDto,
       params: RequestParams = {},
     ) =>
-      this.request<void, any>({
+      this.request<AuthResponseDto, any>({
         path: `/identity/refresh-token`,
         method: "POST",
         body: data,
         type: ContentType.Json,
+        format: "json",
         ...params,
       }),
 
@@ -1364,7 +1367,7 @@ export class Api<
       },
       params: RequestParams = {},
     ) =>
-      this.request<GetCartDto[], any>({
+      this.request<GetCartDto, any>({
         path: `/cart/get-user-cart`,
         method: "GET",
         query: query,

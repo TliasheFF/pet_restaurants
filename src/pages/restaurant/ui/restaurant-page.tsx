@@ -42,7 +42,9 @@ export const RestaurantPage = () => {
     categoryId: String(activeCategoryId),
   });
   const { data: categories } = useGetCategories(restaurantData?.id);
-  const { cart } = useUserCart(restaurantData?.id || 0);
+  const { cart, addProduct, removeProduct } = useUserCart(
+    restaurantData?.id || 0,
+  );
 
   const productsInCartCount = cart?.products.reduce(
     (acc, item) => acc + item.quantity,
@@ -111,9 +113,21 @@ export const RestaurantPage = () => {
       )}
 
       <BaseItemsGrid loading={isProductsLoading}>
-        {productsData?.items.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
+        {productsData?.items.map((product) => {
+          const productQuantity = cart?.products.find(
+            (item) => item.id === product.id,
+          )?.quantity;
+
+          return (
+            <ProductCard
+              key={product.id}
+              product={product}
+              addProduct={addProduct}
+              removeProduct={removeProduct}
+              productQuantity={productQuantity || 0}
+            />
+          );
+        })}
       </BaseItemsGrid>
 
       <Pagination
