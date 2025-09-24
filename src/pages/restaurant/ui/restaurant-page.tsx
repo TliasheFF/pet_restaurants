@@ -9,18 +9,22 @@ import { ArrowBack, ShoppingCart } from '@mui/icons-material';
 import {
   Badge,
   Box,
+  Button,
+  Container,
   IconButton,
   Tab,
   Tabs,
   Tooltip,
   Typography,
 } from '@mui/material';
+import { ErrorBlock } from '@shared/ui/error-block';
 import { Pagination } from '@shared/ui/pagination';
 import { BaseItemsGrid } from '@widgets/base-items-grid';
 import { useState } from 'react';
-import { Link, useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 
 export const RestaurantPage = () => {
+  const navigate = useNavigate();
   const [page, setPage] = useState(1);
   const [activeCategoryId, setActiveCategoryId] = useState(0);
   const { seoUrl = '' } = useParams();
@@ -42,25 +46,16 @@ export const RestaurantPage = () => {
     categoryId: String(activeCategoryId),
   });
   const { data: categories } = useGetCategories(restaurantData?.id);
-  const { cart, addProduct, removeProduct } = useUserCart(
+  const { cart, productsInCartCount, addToCart, changeQuantity } = useUserCart(
     restaurantData?.id || 0,
   );
 
-  const productsInCartCount = cart?.products.reduce(
-    (acc, item) => acc + item.quantity,
-    0,
-  );
-
   if (isError) {
-    return (
-      <Box textAlign="center" marginBlockStart={'50vh'}>
-        Произошла ошибка загрузки. Обновите страницу или попробуйте зайти позже
-      </Box>
-    );
+    return <ErrorBlock />;
   }
 
   return (
-    <>
+    <Container maxWidth="lg" sx={{ marginY: 1 }}>
       <Box
         display="flex"
         alignItems="end"
@@ -70,9 +65,7 @@ export const RestaurantPage = () => {
       >
         <Box display="flex" alignItems="end" gap={1}>
           <Tooltip title="Назад">
-            <Link to={'/'} style={{ color: 'inherit' }}>
-              <ArrowBack />
-            </Link>
+            <Button startIcon={<ArrowBack />} onClick={() => navigate('/')} />
           </Tooltip>
           <Typography variant="h6" component="span">
             {restaurantData?.name}
@@ -80,15 +73,16 @@ export const RestaurantPage = () => {
         </Box>
 
         {!!productsInCartCount && (
-          <Link to="/cart" style={{ color: 'inherit' }}>
-            <Tooltip title="Корзина">
-              <IconButton color="inherit">
-                <Badge badgeContent={productsInCartCount} color="primary">
-                  <ShoppingCart />
-                </Badge>
-              </IconButton>
-            </Tooltip>
-          </Link>
+          <Tooltip title="Корзина">
+            <IconButton
+              color="inherit"
+              onClick={() => navigate(`/cart/${seoUrl}`)}
+            >
+              <Badge badgeContent={productsInCartCount} color="primary">
+                <ShoppingCart />
+              </Badge>
+            </IconButton>
+          </Tooltip>
         )}
       </Box>
 
@@ -122,8 +116,8 @@ export const RestaurantPage = () => {
             <ProductCard
               key={product.id}
               product={product}
-              addProduct={addProduct}
-              removeProduct={removeProduct}
+              addToCart={addToCart}
+              changeQuantity={changeQuantity}
               productQuantity={productQuantity || 0}
             />
           );
@@ -135,6 +129,6 @@ export const RestaurantPage = () => {
         totalPages={productsData?.totalPages}
         onChange={setPage}
       />
-    </>
+    </Container>
   );
 };

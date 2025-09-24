@@ -1,5 +1,7 @@
 import { CartPage } from '@pages/cart';
+import { CartPageLayout } from '@pages/cart/ui/cart-page-layout';
 import { NotFoundPage } from '@pages/not-found';
+import { OrderPage } from '@pages/order';
 import { OrdersPage } from '@pages/orders';
 import { RestaurantPage } from '@pages/restaurant';
 import { RestaurantsPage } from '@pages/restaurants';
@@ -15,8 +17,13 @@ export const router = createBrowserRouter([
       { index: true, element: <RestaurantsPage /> },
       { path: 'restaurant/:seoUrl', element: <RestaurantPage /> },
       {
-        path: 'cart',
-        element: <CartPage />,
+        path: 'cart/:seoUrl',
+        element: <CartPageLayout />,
+        children: [{ index: true, element: <CartPage /> }],
+      },
+      {
+        path: 'order/:seoUrl',
+        element: <OrderPage />,
       },
       {
         path: 'orders',

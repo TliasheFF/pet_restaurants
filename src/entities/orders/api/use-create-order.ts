@@ -1,11 +1,13 @@
 import { apiClient } from '@shared/api';
+import type { CreateOrderDto } from '@shared/api/dto/Api';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-export const useAddToCart = (onSuccess?: () => void) => {
+export const useCreateOrder = (onSuccess?: () => void) => {
   const queryClient = useQueryClient();
+
   return useMutation({
-    mutationFn: (productId: string) => {
-      return apiClient.cart.cartControllerAddToCart({ productId });
+    mutationFn: (params: CreateOrderDto) => {
+      return apiClient.orders.ordersControllerCreateOrder(params);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['cart'] });

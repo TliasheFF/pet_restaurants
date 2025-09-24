@@ -1,6 +1,8 @@
 import { apiClient } from '@shared/api';
 import { useQuery } from '@tanstack/react-query';
 
+const ALL_PRODUCTS_CATEGORY_KEY = '0';
+
 export const useGetProducts = (params: {
   seoUrl: string;
   restaurantId: number;
@@ -12,7 +14,7 @@ export const useGetProducts = (params: {
     queryKey: ['products', params],
     queryFn: () => {
       switch (params.categoryId) {
-        case '0':
+        case ALL_PRODUCTS_CATEGORY_KEY:
           return apiClient.products.productsControllerGetProductByRestId(
             params,
           );

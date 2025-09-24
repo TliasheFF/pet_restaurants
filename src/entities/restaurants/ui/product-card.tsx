@@ -16,20 +16,23 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material';
-import { type Product } from '@shared/api/dto/Api';
+import { ChangeQuantityEnum, type Product } from '@shared/api/dto/Api';
 import { MAIN_COLORS } from '@shared/config/theme';
+import type { FC } from 'react';
 
-export const ProductCard = (props: {
+interface ProductCardProps {
   product: Product;
-  addProduct: (id: number) => void;
-  removeProduct: (id: number) => void;
+  addToCart: (id: string) => void;
+  changeQuantity: (id: number, action: ChangeQuantityEnum) => void;
   productQuantity: number;
-}) => {
+}
+
+export const ProductCard: FC<ProductCardProps> = (props) => {
   const {
     product: { name, image, price, weight, calories, id },
-    addProduct,
-    removeProduct,
     productQuantity,
+    addToCart,
+    changeQuantity,
   } = props;
 
   return (
@@ -49,7 +52,7 @@ export const ProductCard = (props: {
           sx={{
             display: 'flex',
             alignItems: 'center',
-            backgroundColor: MAIN_COLORS.normalSuperLight,
+            backgroundColor: MAIN_COLORS.disabled,
             padding: '0 10px',
             maxWidth: 'fit-content',
             borderRadius: 15,
@@ -84,19 +87,27 @@ export const ProductCard = (props: {
 
           <Box>
             {!!productQuantity ? (
-              <Box>
-                <IconButton onClick={() => removeProduct(id)}>
+              <Box display="flex" alignItems="center">
+                <IconButton
+                  color="primary"
+                  onClick={() => changeQuantity(id, ChangeQuantityEnum.Value1)}
+                >
                   <Remove />
                 </IconButton>
-                {productQuantity}
-                <IconButton onClick={() => addProduct(id)}>
+                <Typography variant="body1" mx={1}>
+                  {productQuantity}
+                </Typography>
+                <IconButton
+                  color="primary"
+                  onClick={() => changeQuantity(id, ChangeQuantityEnum.Value0)}
+                >
                   <Add />
                 </IconButton>
               </Box>
             ) : (
               <Button
                 variant="contained"
-                onClick={() => addProduct(id)}
+                onClick={() => addToCart(String(id))}
                 endIcon={<AddShoppingCart />}
               >
                 Добавить

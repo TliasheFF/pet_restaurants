@@ -1,41 +1,51 @@
 import {
   useAddToCart,
   useChangeQuantity,
+  useClearCart,
   useGetCartByRestaurantId,
 } from '@entities/cart';
 import { ChangeQuantityEnum } from '@shared/api/dto/Api';
+import { useMemo } from 'react';
 
 export const useUserCart = (restaurantId: number) => {
-  const { data: cart, refetch } = useGetCartByRestaurantId(restaurantId);
-  const { mutate: addToCart } = useAddToCart(refetch);
-  const { mutate: changeQuantity } = useChangeQuantity(refetch);
+  const { data: cart } = useGetCartByRestaurantId(restaurantId);
+  const { mutate: addToCart } = useAddToCart();
+  const { mutate: changeQuantity } = useChangeQuantity();
+  const { mutate: clearCart } = useClearCart();
 
-  const addProduct = (productId: number) => {
-    const productQuantity =
-      cart?.products.find((item) => item.id === productId)?.quantity || 0;
+  const totalPrice = useMemo(() => {
+    return cart?.products.reduce(
+      (acc, item) => acc + item.price * item.quantity,
+      0,
+    );
+  }, [cart?.products]);
 
-    if (productQuantity === 0) {
-      addToCart(String(productId));
-    } else {
-      changeQuantity({
-        restaurantId,
-        productId,
-        action: ChangeQuantityEnum.Value0,
-      });
-    }
+  const productsInCartCount = useMemo(() => {
+    return cart?.products.reduce((acc, item) => acc + item.quantity, 0);
+  }, [cart?.products]);
+
+  const addToCartHandler = (productId: string) => {
+    addToCart(productId);
   };
 
-  const removeProduct = (productId: number) => {
+  const handleChangeHandler = (
+    productId: number,
+    action: ChangeQuantityEnum,
+  ) => {
     changeQuantity({
       restaurantId,
       productId,
-      action: ChangeQuantityEnum.Value1,
+      action,
     });
   };
 
   return {
     cart,
-    addProduct,
-    removeProduct,
+    restaurantName: cart?.products[0]?.restaurantName || '',
+    totalPrice,
+    productsInCartCount,
+    addToCart: addToCartHandler,
+    changeQuantity: handleChangeHandler,
+    clearCart,
   };
 };

@@ -1,0 +1,22 @@
+import { ArrowBack } from '@mui/icons-material';
+import { Box, Button, Container } from '@mui/material';
+import { Outlet, useNavigate, useParams } from 'react-router';
+
+export const CartPageLayout = () => {
+  const { seoUrl = '' } = useParams();
+  const navigate = useNavigate();
+
+  return (
+    <Container maxWidth="lg" sx={{ marginY: 1 }}>
+      <Box display="flex" alignItems="center" mb={2}>
+        <Button
+          startIcon={<ArrowBack />}
+          onClick={() => navigate(`/restaurant/${seoUrl}`)}
+        >
+          В ресторан
+        </Button>
+      </Box>
+      <Outlet />
+    </Container>
+  );
+};

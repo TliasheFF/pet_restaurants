@@ -1,8 +1,10 @@
 import { apiClient } from '@shared/api';
 import type { ChangeQuantityEnum } from '@shared/api/dto/Api';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 export const useChangeQuantity = (onSuccess?: () => void) => {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: (params: {
       restaurantId: number;
@@ -16,6 +18,9 @@ export const useChangeQuantity = (onSuccess?: () => void) => {
         action,
       });
     },
-    onSuccess,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['cart'] });
+      onSuccess?.();
+    },
   });
 };

@@ -1,8 +1,10 @@
 import { Order, useGetOrders } from '@entities/orders';
-import { Box, Typography } from '@mui/material';
+import { Box, Button, Container, Typography } from '@mui/material';
 import { Loader } from '@shared/ui/loader';
+import { useNavigate } from 'react-router';
 
 export const OrdersPage = () => {
+  const navigate = useNavigate();
   const { data, isLoading, isError } = useGetOrders();
 
   if (isLoading) {
@@ -29,7 +31,10 @@ export const OrdersPage = () => {
   }
 
   return (
-    <>
+    <Container maxWidth="lg" sx={{ marginY: 1 }}>
+      <Box display="flex" alignItems="center" mb={2}>
+        <Button onClick={() => navigate('/')}>К ресторанам</Button>
+      </Box>
       <Typography variant="h6" component="span">
         Мои заказы
       </Typography>
@@ -45,6 +50,6 @@ export const OrdersPage = () => {
           <Order key={order.id} order={order} />
         ))}
       </Box>
-    </>
+    </Container>
   );
 };
