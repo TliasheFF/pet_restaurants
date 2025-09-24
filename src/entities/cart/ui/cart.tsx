@@ -1,14 +1,6 @@
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
-import {
-  Box,
-  Card,
-  CardContent,
-  CardMedia,
-  IconButton,
-  Typography,
-} from '@mui/material';
+import { Box, Card, CardContent, CardMedia, Typography } from '@mui/material';
 import { type CartItem, ChangeQuantityEnum } from '@shared/api/dto/Api';
+import { ProductQuantityChangeButton } from '@shared/ui/product-quantity-change-button';
 import type { FC } from 'react';
 
 interface CartProps {
@@ -18,6 +10,10 @@ interface CartProps {
 
 export const Cart: FC<CartProps> = (props) => {
   const { item, changeQuantity } = props;
+
+  const handleChange = (action: ChangeQuantityEnum) => {
+    changeQuantity(item.id, action);
+  };
 
   return (
     <Card
@@ -66,25 +62,10 @@ export const Cart: FC<CartProps> = (props) => {
             {item.price} ₽
           </Typography>
 
-          <Box display="flex" alignItems="center">
-            <IconButton
-              size="small"
-              color="primary"
-              onClick={() => changeQuantity(item.id, ChangeQuantityEnum.Value1)}
-            >
-              <RemoveIcon />
-            </IconButton>
-            <Typography variant="body1" mx={1}>
-              {item.quantity}
-            </Typography>
-            <IconButton
-              size="small"
-              color="primary"
-              onClick={() => changeQuantity(item.id, ChangeQuantityEnum.Value0)}
-            >
-              <AddIcon />
-            </IconButton>
-          </Box>
+          <ProductQuantityChangeButton
+            quantity={item.quantity}
+            onChange={handleChange}
+          />
         </Box>
       </CardContent>
     </Card>

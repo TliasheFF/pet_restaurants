@@ -1,9 +1,6 @@
 import {
-  Add,
   AddShoppingCart,
   BatteryChargingFull,
-  CurrencyRuble,
-  Remove,
   Scale,
 } from '@mui/icons-material';
 import {
@@ -12,12 +9,12 @@ import {
   Card,
   CardContent,
   CardMedia,
-  IconButton,
   Tooltip,
   Typography,
 } from '@mui/material';
 import { ChangeQuantityEnum, type Product } from '@shared/api/dto/Api';
 import { MAIN_COLORS } from '@shared/config/theme';
+import { ProductQuantityChangeButton } from '@shared/ui/product-quantity-change-button';
 import type { FC } from 'react';
 
 interface ProductCardProps {
@@ -34,6 +31,10 @@ export const ProductCard: FC<ProductCardProps> = (props) => {
     addToCart,
     changeQuantity,
   } = props;
+
+  const handleChange = (action: ChangeQuantityEnum) => {
+    changeQuantity(id, action);
+  };
 
   return (
     <Card
@@ -52,16 +53,13 @@ export const ProductCard: FC<ProductCardProps> = (props) => {
           sx={{
             display: 'flex',
             alignItems: 'center',
-            backgroundColor: MAIN_COLORS.disabled,
-            padding: '0 10px',
             maxWidth: 'fit-content',
             borderRadius: 15,
           }}
         >
-          <Typography variant="h6" component="span">
-            {price}
+          <Typography variant="h6" component="span" color="primary">
+            {price} ₽
           </Typography>
-          <CurrencyRuble fontSize="small" />
         </Box>
 
         <Box display="flex" justifyContent="space-between" height={30}>
@@ -87,23 +85,10 @@ export const ProductCard: FC<ProductCardProps> = (props) => {
 
           <Box>
             {!!productQuantity ? (
-              <Box display="flex" alignItems="center">
-                <IconButton
-                  color="primary"
-                  onClick={() => changeQuantity(id, ChangeQuantityEnum.Value1)}
-                >
-                  <Remove />
-                </IconButton>
-                <Typography variant="body1" mx={1}>
-                  {productQuantity}
-                </Typography>
-                <IconButton
-                  color="primary"
-                  onClick={() => changeQuantity(id, ChangeQuantityEnum.Value0)}
-                >
-                  <Add />
-                </IconButton>
-              </Box>
+              <ProductQuantityChangeButton
+                quantity={productQuantity}
+                onChange={handleChange}
+              />
             ) : (
               <Button
                 variant="contained"

@@ -57,7 +57,10 @@ export const CartPage = () => {
         </Typography>
       </Box>
 
-      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+      <Box
+        sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
+        padding={2}
+      >
         {cart?.products.map((item) => (
           <Cart key={item.id} item={item} changeQuantity={changeQuantity} />
         ))}
@@ -77,12 +80,13 @@ export const CartPage = () => {
         <Stack
           direction="row"
           gap={2}
-          justifyContent="space-between"
+          justifyContent="flex-end"
           alignItems="center"
         >
           <Button
             variant="outlined"
             color="inherit"
+            size="large"
             startIcon={<DeleteSweepIcon />}
             onClick={handleClear}
           >
@@ -96,7 +100,7 @@ export const CartPage = () => {
             startIcon={<ShoppingCartCheckoutIcon />}
             onClick={handleCreateOrder}
           >
-            Оформить заказ • {totalPrice} ₽
+            Оформить заказ
           </Button>
         </Stack>
       </Box>
