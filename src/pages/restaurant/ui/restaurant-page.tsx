@@ -46,7 +46,7 @@ export const RestaurantPage = () => {
     categoryId: String(activeCategoryId),
   });
   const { data: categories } = useGetCategories(restaurantData?.id);
-  const { cart, productsInCartCount, addToCart, changeQuantity } = useUserCart(
+  const { cart, totalCount, addToCart, changeQuantity } = useUserCart(
     restaurantData?.id || 0,
   );
 
@@ -72,13 +72,13 @@ export const RestaurantPage = () => {
           </Typography>
         </Box>
 
-        {!!productsInCartCount && (
+        {!!totalCount && (
           <Tooltip title="Корзина">
             <IconButton
               color="inherit"
               onClick={() => navigate(`/cart/${seoUrl}`)}
             >
-              <Badge badgeContent={productsInCartCount} color="primary">
+              <Badge badgeContent={totalCount} color="primary">
                 <ShoppingCart />
               </Badge>
             </IconButton>

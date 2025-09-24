@@ -1,10 +1,9 @@
 import { Order, useGetOrders } from '@entities/orders';
-import { Box, Button, Container, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
+import { ErrorBlock } from '@shared/ui/error-block';
 import { Loader } from '@shared/ui/loader';
-import { useNavigate } from 'react-router';
 
 export const OrdersPage = () => {
-  const navigate = useNavigate();
   const { data, isLoading, isError } = useGetOrders();
 
   if (isLoading) {
@@ -20,21 +19,11 @@ export const OrdersPage = () => {
   }
 
   if (isError) {
-    return (
-      <Box textAlign="center" marginBlockStart="50vh">
-        <Typography variant="h6">
-          Произошла ошибка загрузки. Обновите страницу или попробуйте зайти
-          позже
-        </Typography>
-      </Box>
-    );
+    return <ErrorBlock />;
   }
 
   return (
-    <Container maxWidth="lg" sx={{ marginY: 1 }}>
-      <Box display="flex" alignItems="center" mb={2}>
-        <Button onClick={() => navigate('/')}>К ресторанам</Button>
-      </Box>
+    <>
       <Typography variant="h6" component="span">
         Мои заказы
       </Typography>
@@ -50,6 +39,6 @@ export const OrdersPage = () => {
           <Order key={order.id} order={order} />
         ))}
       </Box>
-    </Container>
+    </>
   );
 };

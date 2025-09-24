@@ -1,8 +1,7 @@
-import { CartPage } from '@pages/cart';
-import { CartPageLayout } from '@pages/cart/ui/cart-page-layout';
+import { CartPage, CartPageLayout } from '@pages/cart';
 import { NotFoundPage } from '@pages/not-found';
 import { OrderPage } from '@pages/order';
-import { OrdersPage } from '@pages/orders';
+import { OrdersPage, OrdersPageLayout } from '@pages/orders';
 import { RestaurantPage } from '@pages/restaurant';
 import { RestaurantsPage } from '@pages/restaurants';
 import { createBrowserRouter } from 'react-router';
@@ -27,7 +26,8 @@ export const router = createBrowserRouter([
       },
       {
         path: 'orders',
-        element: <OrdersPage />,
+        element: <OrdersPageLayout />,
+        children: [{ index: true, element: <OrdersPage /> }],
       },
     ],
   },

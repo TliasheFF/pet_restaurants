@@ -1,4 +1,4 @@
-import { queryClient } from '@app/config/query-client';
+import { queryClient } from '@shared/config/queries';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { useNotifications } from '@toolpad/core/useNotifications';
 import { AxiosError } from 'axios';

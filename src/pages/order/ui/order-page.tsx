@@ -17,6 +17,8 @@ import { useNotifications } from '@toolpad/core/useNotifications';
 import { useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 
+import { MAIL_REGEXP } from '../constants/mail-regexp';
+
 export const OrderPage = () => {
   const navigate = useNavigate();
   const { seoUrl = '' } = useParams();
@@ -25,6 +27,40 @@ export const OrderPage = () => {
   const { cart, restaurantName, totalPrice } = useUserCart(restId);
   const { data: user } = useGetUser();
   const notifications = useNotifications();
+
+  const [name, setName] = useState(user?.firstName || '');
+  const [email, setEmail] = useState(user?.email || '');
+  const [comment, setComment] = useState('');
+
+  if (!cart?.products.length) {
+    return (
+      <Container maxWidth="sm" sx={{ mt: 10 }}>
+        <Paper
+          elevation={3}
+          sx={{
+            p: 4,
+            textAlign: 'center',
+            borderRadius: 3,
+            bgcolor: 'background.paper',
+          }}
+        >
+          <Typography variant="h6" color="text.secondary" gutterBottom>
+            🛒 Корзина пуста
+          </Typography>
+          <Typography variant="body1" color="text.secondary" mb={2}>
+            Похоже, у вас нет добавленных товаров. Пожалуйста, вернитесь в меню
+            и выберите что-нибудь вкусное!
+          </Typography>
+          <Button
+            variant="contained"
+            onClick={() => navigate(`/restaurant/${seoUrl}`)}
+          >
+            Вернуться в ресторан
+          </Button>
+        </Paper>
+      </Container>
+    );
+  }
 
   const createOrderSuccessCallback = () => {
     notifications.show(
@@ -39,21 +75,17 @@ export const OrderPage = () => {
 
   const { mutate: createOrder } = useCreateOrder(createOrderSuccessCallback);
 
-  const [name, setName] = useState('Гость');
-  const [email, setEmail] = useState('');
-  const [comment, setComment] = useState('');
-
   const emailError = useMemo(() => {
-    if (!email) return 'Укажите почту';
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-    return re.test(email) ? '' : 'Неверный формат почты';
+    if (!email)
+      return 'Пожалуйста, укажите почту. Информация нужна для отправки квитанции о заказе';
+    return MAIL_REGEXP.test(email) ? '' : 'Неверный формат почты';
   }, [email]);
 
   const isFormInvalid = !!emailError;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (isFormInvalid) return;
+    if (!!emailError) return;
     createOrder({
       name,
       phone: user?.phone || '',

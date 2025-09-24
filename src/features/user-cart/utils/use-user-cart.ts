@@ -20,7 +20,7 @@ export const useUserCart = (restaurantId: number) => {
     );
   }, [cart?.products]);
 
-  const productsInCartCount = useMemo(() => {
+  const totalCount = useMemo(() => {
     return cart?.products.reduce((acc, item) => acc + item.quantity, 0);
   }, [cart?.products]);
 
@@ -43,7 +43,7 @@ export const useUserCart = (restaurantId: number) => {
     cart,
     restaurantName: cart?.products[0]?.restaurantName || '',
     totalPrice,
-    productsInCartCount,
+    totalCount,
     addToCart: addToCartHandler,
     changeQuantity: handleChangeHandler,
     clearCart,
