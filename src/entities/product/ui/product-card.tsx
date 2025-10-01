@@ -1,4 +1,3 @@
-import { ProductQuantityChangeButton } from '@entities/product';
 import {
   AddShoppingCart,
   BatteryChargingFull,
@@ -14,8 +13,10 @@ import {
   Typography,
 } from '@mui/material';
 import { ChangeQuantityEnum, type Product } from '@shared/api/dto/Api';
-import { MAIN_COLORS } from '@shared/config/theme';
+import { ProductQuantityChangeButton } from '@shared/ui/product-quantity-change-button';
 import type { FC } from 'react';
+
+import styles from './product-card.module.css';
 
 interface ProductCardProps {
   product: Product;
@@ -24,59 +25,44 @@ interface ProductCardProps {
   productQuantity: number;
 }
 
-export const ProductCard: FC<ProductCardProps> = (props) => {
-  const {
-    product: { name, image, price, weight, calories, id },
-    productQuantity,
-    addToCart,
-    changeQuantity,
-  } = props;
-
+export const ProductCard: FC<ProductCardProps> = ({
+  product: { name, image, price, weight, calories, id },
+  productQuantity,
+  addToCart,
+  changeQuantity,
+}) => {
   const handleChange = (action: ChangeQuantityEnum) => {
     changeQuantity(id, action);
   };
 
   return (
-    <Card
-      sx={{
-        width: 350,
-        ':hover': { scale: 1.01, transition: '0.5s' },
-      }}
-    >
-      <CardMedia image={image} title={name} sx={{ height: 200 }} />
-      <CardContent sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+    <Card className={styles['product-card']}>
+      <CardMedia
+        image={image}
+        title={name}
+        className={styles['product-card__media']}
+      />
+      <CardContent className={styles['product-card__content']}>
         <Typography variant="h6" component="span">
           {name}
         </Typography>
 
-        <Box
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            maxWidth: 'fit-content',
-            borderRadius: 15,
-          }}
-        >
+        <Box className={styles['product-card__price-container']}>
           <Typography variant="h6" component="span" color="primary">
             {price} ₽
           </Typography>
         </Box>
 
-        <Box display="flex" justifyContent="space-between" height={30}>
-          <Box
-            display="flex"
-            gap={2}
-            fontSize={12}
-            color={MAIN_COLORS.disabledDark}
-          >
+        <Box className={styles['product-card__info-row']}>
+          <Box className={styles['product-card__info-left']}>
             <Tooltip title="Вес">
-              <Box display="flex" alignItems="center" gap={1}>
+              <Box className={styles['product-card__info-left-box']}>
                 <Scale />
                 <span>{weight}</span>
               </Box>
             </Tooltip>
             <Tooltip title="Количество калорий">
-              <Box display="flex" alignItems="center" gap={1}>
+              <Box className={styles['product-card__info-left-box']}>
                 <BatteryChargingFull />
                 <span>{calories}</span>
               </Box>

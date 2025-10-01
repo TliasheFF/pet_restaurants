@@ -18,6 +18,8 @@ import { useNotifications } from '@toolpad/core/useNotifications';
 import { useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 
+import styles from './order-page.module.css';
+
 export const OrderPage = () => {
   const navigate = useNavigate();
   const { seoUrl = '' } = useParams();
@@ -30,36 +32,6 @@ export const OrderPage = () => {
   const [name, setName] = useState(user?.firstName || '');
   const [email, setEmail] = useState(user?.email || '');
   const [comment, setComment] = useState('');
-
-  if (!cart?.products.length) {
-    return (
-      <Container maxWidth="sm" sx={{ mt: 10 }}>
-        <Paper
-          elevation={3}
-          sx={{
-            p: 4,
-            textAlign: 'center',
-            borderRadius: 3,
-            bgcolor: 'background.paper',
-          }}
-        >
-          <Typography variant="h6" color="text.secondary" gutterBottom>
-            🛒 Корзина пуста
-          </Typography>
-          <Typography variant="body1" color="text.secondary" mb={2}>
-            Похоже, у вас нет добавленных товаров. Пожалуйста, вернитесь в меню
-            и выберите что-нибудь вкусное!
-          </Typography>
-          <Button
-            variant="contained"
-            onClick={() => navigate(`/restaurant/${seoUrl}`)}
-          >
-            Вернуться в ресторан
-          </Button>
-        </Paper>
-      </Container>
-    );
-  }
 
   const createOrderSuccessCallback = () => {
     notifications.show(
@@ -95,8 +67,34 @@ export const OrderPage = () => {
     });
   };
 
+  if (!cart?.products.length) {
+    return (
+      <Container maxWidth="sm" className={styles['order-page__empty']}>
+        <Paper elevation={3} className={styles['order-page__empty-paper']}>
+          <Typography variant="h6" color="text.secondary" gutterBottom>
+            🛒 Корзина пуста
+          </Typography>
+          <Typography
+            variant="body1"
+            color="text.secondary"
+            className={styles['order-page__empty-text']}
+          >
+            Похоже, у вас нет добавленных товаров. Пожалуйста, вернитесь в меню
+            и выберите что-нибудь вкусное!
+          </Typography>
+          <Button
+            variant="contained"
+            onClick={() => navigate(`/restaurant/${seoUrl}`)}
+          >
+            Вернуться в ресторан
+          </Button>
+        </Paper>
+      </Container>
+    );
+  }
+
   return (
-    <Container maxWidth="lg" sx={{ marginY: 1 }}>
+    <Container maxWidth="lg" className={styles['order-page']}>
       <Box display="flex" alignItems="center" mb={2}>
         <Button
           startIcon={<ArrowBack />}
@@ -105,36 +103,15 @@ export const OrderPage = () => {
           В корзину
         </Button>
       </Box>
+
       <Box
         component="form"
         onSubmit={handleSubmit}
-        sx={{
-          minHeight: '100%',
-          display: 'grid',
-          placeItems: 'center',
-          bgcolor: 'background.default',
-          px: 2,
-          py: 4,
-        }}
+        className={styles['order-page__form']}
       >
-        <Paper
-          elevation={3}
-          sx={{
-            width: '100%',
-            maxWidth: 560,
-            p: { xs: 2.5, sm: 3.5 },
-            borderRadius: 3,
-          }}
-        >
+        <Paper elevation={3} className={styles['order-page__paper']}>
           <Stack spacing={2.5}>
-            <Box
-              sx={{
-                display: 'flex',
-                alignItems: 'baseline',
-                justifyContent: 'space-between',
-                gap: 2,
-              }}
-            >
+            <Box className={styles['order-page__header']}>
               <Box>
                 <Typography variant="overline" color="text.secondary">
                   Ресторан
@@ -143,7 +120,7 @@ export const OrderPage = () => {
                   {restaurantName || '—'}
                 </Typography>
               </Box>
-              <Box textAlign="right">
+              <Box className={styles['order-page__total']}>
                 <Typography variant="overline" color="text.secondary">
                   Итого
                 </Typography>

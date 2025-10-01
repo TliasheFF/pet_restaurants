@@ -23,6 +23,8 @@ import { BaseItemsGrid } from '@widgets/base-items-grid';
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 
+import styles from './restaurant-page.module.css';
+
 export const RestaurantPage = () => {
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
@@ -55,15 +57,9 @@ export const RestaurantPage = () => {
   }
 
   return (
-    <Container maxWidth="lg" sx={{ marginY: 1 }}>
-      <Box
-        display="flex"
-        alignItems="end"
-        justifyContent={'space-between'}
-        margin={2}
-        height={40}
-      >
-        <Box display="flex" alignItems="end" gap={1}>
+    <Container maxWidth="lg" className={styles['restaurant-page']}>
+      <Box className={styles['restaurant-page__header']}>
+        <Box className={styles['restaurant-page__header-left']}>
           <Tooltip title="Назад">
             <Button startIcon={<ArrowBack />} onClick={() => navigate('/')} />
           </Tooltip>
@@ -93,7 +89,7 @@ export const RestaurantPage = () => {
           variant="scrollable"
           scrollButtons
           allowScrollButtonsMobile
-          sx={{ mt: 2 }}
+          className={styles['restaurant-page__tabs']}
         >
           <Tab key="all" label="Все" />
           {categories.map((category) => (

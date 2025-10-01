@@ -1,0 +1,22 @@
+.restaurant-card {
+  width: 350px;
+  cursor: pointer;
+  transition: transform 0.5s;
+}
+
+.restaurant-card:hover {
+  transform: scale(1.01);
+}
+
+.restaurant-card__media {
+  height: 200px;
+}
+
+.restaurant-card__content {
+  text-align: center;
+}
+
+.restaurant-card__title {
+  line-height: 1;
+  display: block;
+}

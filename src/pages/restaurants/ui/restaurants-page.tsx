@@ -8,6 +8,8 @@ import { useState } from 'react';
 
 import { DEFAULT_PAGE_SIZE } from '../constants/default-page-size';
 
+import styles from './restaurants-page.module.css';
+
 export const RestaurantsPage = () => {
   const [page, setPage] = useState(1);
 
@@ -21,7 +23,7 @@ export const RestaurantsPage = () => {
   }
 
   return (
-    <Container maxWidth="lg" sx={{ marginY: 1 }}>
+    <Container maxWidth="lg" className={styles['restaurants-page']}>
       <BaseItemsGrid loading={isLoading}>
         {data?.items?.map((item) => (
           <RestaurantCard key={item.id} restaurant={item} />

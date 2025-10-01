@@ -1,0 +1,19 @@
+.ordered-product {
+  display: flex;
+  align-items: center;
+}
+
+.ordered-product__title {
+  white-space: nowrap;
+}
+
+.ordered-product__separator {
+  flex-grow: 1;
+  border-bottom: 1px dotted;
+  margin: 0 5px;
+  height: 18px;
+}
+
+.ordered-product__price {
+  white-space: nowrap;
+}

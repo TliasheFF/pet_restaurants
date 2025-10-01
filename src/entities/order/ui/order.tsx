@@ -12,23 +12,16 @@ import dayjs from 'dayjs';
 
 import { OrderedProduct } from './ordered-product';
 
+import styles from './order.module.css';
+
 export const Order = ({ order }: { order: GetOrderDto }) => {
   const { id, restaurantName, createdAt, products, price } = order;
 
   return (
-    <Accordion sx={{ minWidth: 350, width: '100%' }}>
+    <Accordion className={styles['order']}>
       <AccordionSummary expandIcon={<ExpandMore />}>
-        <Box
-          width="100%"
-          display="flex"
-          justifyContent="space-between"
-          alignItems="center"
-        >
-          <Box
-            display="flex"
-            justifyContent="space-between"
-            flexDirection="column"
-          >
+        <Box className={styles['order__summary-content']}>
+          <Box className={styles['order__summary-left']}>
             <Typography variant="h6" component="span">
               Заказ #{id}
             </Typography>
@@ -38,7 +31,7 @@ export const Order = ({ order }: { order: GetOrderDto }) => {
             <Typography
               variant="subtitle1"
               component="span"
-              color={MAIN_COLORS.disabledDark}
+              style={{ color: MAIN_COLORS.disabledDark }}
             >
               Создан {dayjs(createdAt).format('DD.MM.YYYY HH:mm')}
             </Typography>

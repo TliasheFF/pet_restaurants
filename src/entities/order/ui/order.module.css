@@ -1,0 +1,17 @@
+.order {
+  min-width: 350px;
+  width: 100%;
+}
+
+.order__summary-content {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order__summary-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

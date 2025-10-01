@@ -3,8 +3,10 @@ import { useGetRestaurant } from '@entities/restaurant';
 import { useUserCart } from '@features/user-cart';
 import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
-import { Box, Button, Stack, Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import { useNavigate, useParams } from 'react-router';
+
+import styles from './cart-page.module.css';
 
 export const CartPage = () => {
   const navigate = useNavigate();
@@ -14,20 +16,7 @@ export const CartPage = () => {
   const { cart, totalPrice, changeQuantity, clearCart } = useUserCart(restId);
 
   if (!cart?.products.length) {
-    return (
-      <Box
-        sx={{
-          height: '80vh',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          fontSize: 24,
-          color: 'text.secondary',
-        }}
-      >
-        Ваша корзина пуста
-      </Box>
-    );
+    return <Box className={styles['cart-page__empty']}>Ваша корзина пуста</Box>;
   }
 
   const handleClear = () => {
@@ -40,15 +29,7 @@ export const CartPage = () => {
 
   return (
     <>
-      <Box
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          bgcolor: 'background.paper',
-          mb: 2,
-        }}
-      >
+      <Box className={styles['cart-page__header']}>
         <Typography variant="h6" fontWeight="bold">
           Ваш заказ
         </Typography>
@@ -57,32 +38,14 @@ export const CartPage = () => {
         </Typography>
       </Box>
 
-      <Box
-        sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
-        padding={2}
-      >
+      <Box className={styles['cart-page__list']}>
         {cart?.products.map((item) => (
           <Cart key={item.id} item={item} changeQuantity={changeQuantity} />
         ))}
       </Box>
 
-      <Box
-        sx={{
-          position: 'sticky',
-          bottom: 0,
-          pt: 2,
-          pb: 2,
-          mt: 3,
-          bgcolor: 'background.paper',
-          borderTop: (theme) => `1px solid ${theme.palette.divider}`,
-        }}
-      >
-        <Stack
-          direction="row"
-          gap={2}
-          justifyContent="flex-end"
-          alignItems="center"
-        >
+      <Box className={styles['cart-page__footer']}>
+        <div className={styles['cart-page__actions']}>
           <Button
             variant="outlined"
             color="inherit"
@@ -102,7 +65,7 @@ export const CartPage = () => {
           >
             Оформить заказ
           </Button>
-        </Stack>
+        </div>
       </Box>
     </>
   );

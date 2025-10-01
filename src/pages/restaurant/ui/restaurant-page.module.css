@@ -1,0 +1,21 @@
+.restaurant-page {
+  margin-block: 8px;
+}
+
+.restaurant-page__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin: 16px;
+  height: 40px;
+}
+
+.restaurant-page__header-left {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.restaurant-page__tabs {
+  margin-top: 16px;
+}

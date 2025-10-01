@@ -1,0 +1,44 @@
+.order-page {
+  margin-block: 8px;
+}
+
+.order-page__form {
+  min-height: 100%;
+  display: grid;
+  place-items: center;
+  background-color: var(--mui-palette-background-default);
+  padding: 32px 16px;
+}
+
+.order-page__paper {
+  width: 100%;
+  max-width: 560px;
+  padding: 28px;
+  border-radius: 24px;
+}
+
+.order-page__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.order-page__total {
+  text-align: right;
+}
+
+.order-page__empty {
+  margin-top: 80px;
+}
+
+.order-page__empty-paper {
+  padding: 32px;
+  text-align: center;
+  border-radius: 24px;
+  background-color: var(--mui-palette-background-paper);
+}
+
+.order-page__empty-text {
+  margin-bottom: 16px;
+}

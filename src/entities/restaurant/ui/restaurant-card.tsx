@@ -2,16 +2,10 @@ import { Card, CardContent, CardMedia, Typography } from '@mui/material';
 import type { Restaurant } from '@shared/api/dto/Api';
 import { useNavigate } from 'react-router';
 
-const cardStyles = {
-  width: 350,
-  ':hover': { cursor: 'pointer', scale: 1.01, transition: '0.5s' },
-};
+import styles from './restaurant-card.module.css';
 
-export const RestaurantCard = (props: { restaurant: Restaurant }) => {
-  const {
-    restaurant: { logo, name, seoUrl },
-  } = props;
-
+export const RestaurantCard = ({ restaurant }: { restaurant: Restaurant }) => {
+  const { logo, name, seoUrl } = restaurant;
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -19,15 +13,17 @@ export const RestaurantCard = (props: { restaurant: Restaurant }) => {
   };
 
   return (
-    <Card sx={{ ...cardStyles }} onClick={handleClick}>
-      <CardMedia image={logo} title={name} sx={{ height: 200 }} />
-      <CardContent>
+    <Card className={styles['restaurant-card']} onClick={handleClick}>
+      <CardMedia
+        image={logo}
+        title={name}
+        className={styles['restaurant-card__media']}
+      />
+      <CardContent className={styles['restaurant-card__content']}>
         <Typography
           variant="h6"
           component="span"
-          lineHeight={1}
-          textAlign="center"
-          display="block"
+          className={styles['restaurant-card__title']}
         >
           {name}
         </Typography>

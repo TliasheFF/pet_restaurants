@@ -1,50 +1,29 @@
-import { ProductQuantityChangeButton } from '@entities/product';
-import { Box, Card, CardContent, CardMedia, Typography } from '@mui/material';
+import { Box, Card, CardContent, Typography } from '@mui/material';
 import { type CartItem, ChangeQuantityEnum } from '@shared/api/dto/Api';
+import { ProductQuantityChangeButton } from '@shared/ui/product-quantity-change-button';
 import type { FC } from 'react';
+
+import styles from './Cart.module.css';
 
 interface CartProps {
   item: CartItem;
   changeQuantity: (id: number, action: ChangeQuantityEnum) => void;
 }
 
-export const Cart: FC<CartProps> = (props) => {
-  const { item, changeQuantity } = props;
-
+export const Cart: FC<CartProps> = ({ item, changeQuantity }) => {
   const handleChange = (action: ChangeQuantityEnum) => {
     changeQuantity(item.id, action);
   };
 
   return (
-    <Card
-      sx={{
-        display: 'flex',
-        alignItems: 'center',
-        p: 2,
-        borderRadius: 3,
-        boxShadow: 3,
-      }}
-    >
-      <CardMedia
-        component="img"
-        image={item.image}
+    <Card className={styles['cart']}>
+      <img
+        src={item.image}
         alt={item.title}
-        sx={{
-          width: 100,
-          height: 100,
-          borderRadius: 2,
-          objectFit: 'cover',
-          mr: 2,
-        }}
+        className={styles['cart__media']}
       />
 
-      <CardContent
-        sx={{
-          flex: 1,
-          p: 0,
-          '&:last-child': { pb: 0 },
-        }}
-      >
+      <CardContent className={styles['cart__content']}>
         <Typography variant="h6" fontWeight="bold">
           {item.title}
         </Typography>
@@ -52,12 +31,7 @@ export const Cart: FC<CartProps> = (props) => {
           {item.restaurantName}
         </Typography>
 
-        <Box
-          mt={1}
-          display="flex"
-          justifyContent="space-between"
-          alignItems="center"
-        >
+        <Box className={styles['cart__footer']}>
           <Typography variant="h6" color="primary">
             {item.price} ₽
           </Typography>

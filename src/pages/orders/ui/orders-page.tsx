@@ -3,6 +3,8 @@ import { Box, Typography } from '@mui/material';
 import { ErrorBlock } from '@shared/ui/error-block';
 import { Loader } from '@shared/ui/loader';
 
+import styles from './orders-page.module.css';
+
 export const OrdersPage = () => {
   const { data, isLoading, isError } = useGetOrders();
 
@@ -10,35 +12,39 @@ export const OrdersPage = () => {
     return <Loader isOpen={isLoading} />;
   }
 
-  if (!data?.items.length) {
+  if (isError) {
     return (
-      <Box textAlign="center" marginBlockStart="20vh">
-        <Typography variant="h6">У вас пока нет заказов</Typography>
-      </Box>
+      <div className={styles['orders-page']}>
+        <ErrorBlock />
+      </div>
     );
   }
 
-  if (isError) {
-    return <ErrorBlock />;
+  if (!data?.items.length) {
+    return (
+      <div className={styles['orders-page']}>
+        <div className={styles['orders-page__empty']}>
+          <Typography variant="h6">У вас пока нет заказов</Typography>
+        </div>
+      </div>
+    );
   }
 
   return (
-    <>
-      <Typography variant="h6" component="span">
+    <div className={styles['orders-page']}>
+      <Typography
+        variant="h6"
+        component="span"
+        className={styles['orders-page__title']}
+      >
         Мои заказы
       </Typography>
 
-      <Box
-        display="flex"
-        flexDirection="column"
-        alignItems="center"
-        gap={2}
-        marginBlockStart={2}
-      >
-        {data?.items.map((order) => (
+      <Box className={styles['orders-page__list']}>
+        {data.items.map((order) => (
           <Order key={order.id} order={order} />
         ))}
       </Box>
-    </>
+    </div>
   );
 };
