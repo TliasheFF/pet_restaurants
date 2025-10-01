@@ -1,3 +1,4 @@
+import { ProductQuantityChangeButton } from '@entities/product';
 import {
   AddShoppingCart,
   BatteryChargingFull,
@@ -14,7 +15,6 @@ import {
 } from '@mui/material';
 import { ChangeQuantityEnum, type Product } from '@shared/api/dto/Api';
 import { MAIN_COLORS } from '@shared/config/theme';
-import { ProductQuantityChangeButton } from '@shared/ui/product-quantity-change-button';
 import type { FC } from 'react';
 
 interface ProductCardProps {

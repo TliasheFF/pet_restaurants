@@ -1,7 +1,7 @@
 import { apiClient } from '@shared/api';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-export const useAddToCart = (onSuccess?: () => void) => {
+export const useAddToCart = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (productId: string) => {
@@ -9,7 +9,6 @@ export const useAddToCart = (onSuccess?: () => void) => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['cart'] });
-      onSuccess?.();
     },
   });
 };

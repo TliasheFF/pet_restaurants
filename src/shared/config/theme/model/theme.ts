@@ -1,56 +1,22 @@
 import { createTheme } from '@mui/material';
 
-import { MAIN_COLORS } from '../constants/main-colors';
+import { MuiAccordion } from '../constants/mui-components/mui-accordion';
+import { MuiButton } from '../constants/mui-components/mui-button';
+import { MuiCard } from '../constants/mui-components/mui-card';
+import { MuiTab } from '../constants/mui-components/mui-tab';
+import { MuiTooltip } from '../constants/mui-components/mui-tooltip';
+import { palette } from '../constants/palette';
+import { typography } from '../constants/typography';
 
 export const theme = createTheme({
   cssVariables: true,
-  typography: {
-    fontFamily: 'Montserrat',
-  },
-  palette: {
-    primary: {
-      main: MAIN_COLORS.primary,
-    },
-  },
+  typography,
+  palette,
   components: {
-    MuiCard: {
-      styleOverrides: {
-        root: {
-          boxShadow:
-            '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
-          borderRadius: 10,
-        },
-      },
-    },
-    MuiTooltip: {
-      styleOverrides: {
-        tooltip: {
-          backgroundColor: MAIN_COLORS.primary,
-        },
-      },
-    },
-    MuiButton: {
-      styleOverrides: {
-        root: {
-          textTransform: 'none',
-        },
-      },
-    },
-    MuiTab: {
-      styleOverrides: {
-        root: {
-          textTransform: 'none',
-        },
-      },
-    },
-    MuiAccordion: {
-      styleOverrides: {
-        root: {
-          boxShadow:
-            '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
-          borderRadius: 10,
-        },
-      },
-    },
+    MuiCard,
+    MuiTooltip,
+    MuiButton,
+    MuiTab,
+    MuiAccordion,
   },
 });

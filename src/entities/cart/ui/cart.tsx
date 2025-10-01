@@ -1,6 +1,6 @@
+import { ProductQuantityChangeButton } from '@entities/product';
 import { Box, Card, CardContent, CardMedia, Typography } from '@mui/material';
 import { type CartItem, ChangeQuantityEnum } from '@shared/api/dto/Api';
-import { ProductQuantityChangeButton } from '@shared/ui/product-quantity-change-button';
 import type { FC } from 'react';
 
 interface CartProps {

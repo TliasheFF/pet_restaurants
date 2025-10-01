@@ -1,6 +1,7 @@
 import { Box } from '@mui/material';
-import { Header } from '@widgets/header';
 import { Outlet } from 'react-router';
+
+import { Header } from './header';
 
 export const Layout = () => {
   return (

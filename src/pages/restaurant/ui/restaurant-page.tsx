@@ -2,8 +2,8 @@ import {
   ProductCard,
   useGetCategories,
   useGetProducts,
-  useGetRestaurant,
-} from '@entities/restaurants';
+} from '@entities/product';
+import { useGetRestaurant } from '@entities/restaurant';
 import { useUserCart } from '@features/user-cart';
 import { ArrowBack, ShoppingCart } from '@mui/icons-material';
 import {

@@ -1,6 +1,6 @@
-import { useCreateOrder } from '@entities/orders';
-import { useGetRestaurant } from '@entities/restaurants';
+import { useGetRestaurant } from '@entities/restaurant';
 import { useGetUser } from '@entities/user';
+import { useCreateOrder } from '@features/create-order';
 import { useUserCart } from '@features/user-cart';
 import { ArrowBack } from '@mui/icons-material';
 import {
@@ -13,11 +13,10 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import { MAIL_REGEXP } from '@shared/constants';
 import { useNotifications } from '@toolpad/core/useNotifications';
 import { useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
-
-import { MAIL_REGEXP } from '../constants/mail-regexp';
 
 export const OrderPage = () => {
   const navigate = useNavigate();

@@ -1,6 +1,6 @@
+import { useUserData } from '@entities/user';
 import { AuthForm } from '@features/authorization';
 import { Paper, Typography } from '@mui/material';
-import { useUserData } from '@shared/store/user-data';
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const { isAuthorized } = useUserData();

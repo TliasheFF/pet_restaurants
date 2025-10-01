@@ -1,5 +1,5 @@
+import { useUserData } from '@entities/user';
 import { apiClient } from '@shared/api';
-import { useUserData } from '@shared/store/user-data';
 import { useMutation } from '@tanstack/react-query';
 
 export const useLogin = () => {

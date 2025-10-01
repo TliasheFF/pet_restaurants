@@ -1,11 +1,12 @@
-import { RestaurantCard } from '@entities/restaurants';
-import { useGetAllRestaurants } from '@entities/restaurants/api/use-get-all-restaurants';
+import { RestaurantCard } from '@entities/restaurant';
+import { useGetAllRestaurants } from '@entities/restaurant/api/use-get-all-restaurants';
 import { Container } from '@mui/material';
-import { DEFAULT_PAGE_SIZE } from '@shared/config/theme';
 import { ErrorBlock } from '@shared/ui/error-block';
 import { Pagination } from '@shared/ui/pagination';
 import { BaseItemsGrid } from '@widgets/base-items-grid';
 import { useState } from 'react';
+
+import { DEFAULT_PAGE_SIZE } from '../constants/default-page-size';
 
 export const RestaurantsPage = () => {
   const [page, setPage] = useState(1);

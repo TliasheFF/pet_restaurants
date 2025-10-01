@@ -1,5 +1,5 @@
 import { Cart } from '@entities/cart';
-import { useGetRestaurant } from '@entities/restaurants';
+import { useGetRestaurant } from '@entities/restaurant';
 import { useUserCart } from '@features/user-cart';
 import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';

@@ -1,6 +1,6 @@
+import { useUserData } from '@entities/user';
 import { AccountCircle } from '@mui/icons-material';
 import { IconButton, Menu, MenuItem, Tooltip } from '@mui/material';
-import { useUserData } from '@shared/store/user-data';
 import { useDialogs } from '@toolpad/core/useDialogs';
 import { type MouseEvent, useState } from 'react';
 import { useNavigate } from 'react-router';
