@@ -1,0 +1,31 @@
+.cart-element {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  border-radius: 24px;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cart-element__media {
+  width: 100px;
+  height: 100px;
+  border-radius: 16px;
+  object-fit: cover;
+  margin-right: 16px;
+}
+
+.cart-element__content {
+  flex: 1;
+  padding: 0;
+}
+
+.cart-element__content:last-child {
+  padding-bottom: 0 !important;
+}
+
+.cart-element__footer {
+  margin-top: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

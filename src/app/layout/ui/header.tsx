@@ -1,6 +1,6 @@
 import { DinnerDining } from '@mui/icons-material';
 import { AppBar, Box, Button, Toolbar, Typography } from '@mui/material';
-import { ProfileMenu } from '@widgets/profile-menu';
+import { ProfileMenu } from '@widgets/profile-group/profile-menu';
 import { useNavigate } from 'react-router';
 
 export const Header = () => {

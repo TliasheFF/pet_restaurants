@@ -1,0 +1,12 @@
+.orders__list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-block-start: 16px;
+}
+
+.orders__empty {
+  text-align: center;
+  margin-block-start: 20vh;
+}

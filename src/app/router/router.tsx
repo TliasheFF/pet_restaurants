@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router';
 
-import { mainRoute } from './routes/main.route';
+import { indexRoute } from './routes/index.route';
 import { notFountRoute } from './routes/not-found.route';
 
-export const router = createBrowserRouter([mainRoute, notFountRoute]);
+export const router = createBrowserRouter([indexRoute, notFountRoute]);
