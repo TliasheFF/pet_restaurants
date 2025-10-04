@@ -1,4 +1,4 @@
-import { Order, useGetOrders } from '@entities/order';
+import { Order, useGetOrders } from '@entities/profile-group/order';
 import { Box, Typography } from '@mui/material';
 import { ErrorBlock } from '@shared/ui/error-block';
 import { Loader } from '@shared/ui/loader';

@@ -1,7 +1,7 @@
-import { useGetRestaurant } from '@entities/restaurant';
-import { useGetUser } from '@entities/user';
-import { useCreateOrder } from '@features/cart-group/create-order';
-import { useUserCart } from '@features/cart-group/user-cart';
+import { useGetUser } from '@entities/profile-group/user';
+import { useGetRestaurant } from '@entities/restaurants-group/restaurant';
+import { useCreateOrder } from '@features/profile-group/create-order';
+import { useUserCart } from '@features/profile-group/user-cart';
 import {
   Box,
   Button,

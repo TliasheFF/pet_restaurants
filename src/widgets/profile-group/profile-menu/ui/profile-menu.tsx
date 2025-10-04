@@ -1,4 +1,4 @@
-import { useUserData } from '@entities/user';
+import { useUserData } from '@entities/profile-group/user';
 import { AccountCircle } from '@mui/icons-material';
 import { IconButton, Menu, MenuItem, Tooltip } from '@mui/material';
 import { useDialogs } from '@toolpad/core/useDialogs';

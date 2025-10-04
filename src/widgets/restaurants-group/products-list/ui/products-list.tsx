@@ -2,9 +2,9 @@ import {
   ProductCard,
   useGetCategories,
   useGetProducts,
-} from '@entities/product';
-import { useGetRestaurant } from '@entities/restaurant';
-import { useUserCart } from '@features/cart-group/user-cart';
+} from '@entities/restaurants-group/product';
+import { useGetRestaurant } from '@entities/restaurants-group/restaurant';
+import { useUserCart } from '@features/profile-group/user-cart';
 import { Tab, Tabs } from '@mui/material';
 import { BaseItemsGrid } from '@shared/ui/base-items-grid';
 import { ErrorBlock } from '@shared/ui/error-block';

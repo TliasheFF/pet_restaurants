@@ -3,7 +3,7 @@ import {
   useChangeQuantity,
   useClearCart,
   useGetCartByRestaurantId,
-} from '@entities/cart';
+} from '@entities/profile-group/cart';
 import { ChangeQuantityEnum } from '@shared/api/dto/Api';
 import { useMemo } from 'react';
 

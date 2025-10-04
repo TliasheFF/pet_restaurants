@@ -1,6 +1,6 @@
-import { CartElement } from '@entities/cart';
-import { useGetRestaurant } from '@entities/restaurant';
-import { useUserCart } from '@features/cart-group/user-cart';
+import { CartElement } from '@entities/profile-group/cart';
+import { useGetRestaurant } from '@entities/restaurants-group/restaurant';
+import { useUserCart } from '@features/profile-group/user-cart';
 import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
 import { Box, Button, Typography } from '@mui/material';

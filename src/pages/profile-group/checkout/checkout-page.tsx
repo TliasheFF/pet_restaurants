@@ -1,6 +1,6 @@
 import { ArrowBack } from '@mui/icons-material';
 import { Box, Button, Container } from '@mui/material';
-import { Checkout } from '@widgets/checkout';
+import { Checkout } from '@widgets/profile-group/checkout';
 import { useNavigate, useParams } from 'react-router';
 
 import styles from './checkout-page.module.css';

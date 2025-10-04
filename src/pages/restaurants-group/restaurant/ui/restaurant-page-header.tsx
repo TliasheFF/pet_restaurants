@@ -1,5 +1,5 @@
-import { useGetRestaurant } from '@entities/restaurant';
-import { useUserCart } from '@features/cart-group/user-cart';
+import { useGetRestaurant } from '@entities/restaurants-group/restaurant';
+import { useUserCart } from '@features/profile-group/user-cart';
 import { ArrowBack, ShoppingCart } from '@mui/icons-material';
 import {
   Badge,

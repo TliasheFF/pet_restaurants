@@ -1,5 +1,5 @@
-import { useUserData } from '@entities/user';
-import { AuthForm } from '@features/authorization';
+import { useUserData } from '@entities/profile-group/user';
+import { AuthForm } from '@features/profile-group/authorization';
 import { Paper, Typography } from '@mui/material';
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {

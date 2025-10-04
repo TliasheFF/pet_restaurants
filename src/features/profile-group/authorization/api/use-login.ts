@@ -1,4 +1,4 @@
-import { useUserData } from '@entities/user';
+import { useUserData } from '@entities/profile-group/user';
 import { apiClient } from '@shared/api';
 import { useMutation } from '@tanstack/react-query';
 

@@ -1,4 +1,7 @@
-import { RestaurantCard, useGetAllRestaurants } from '@entities/restaurant';
+import {
+  RestaurantCard,
+  useGetAllRestaurants,
+} from '@entities/restaurants-group/restaurant';
 import { BaseItemsGrid } from '@shared/ui/base-items-grid';
 import { ErrorBlock } from '@shared/ui/error-block';
 import { Pagination } from '@shared/ui/pagination';
