@@ -1,11 +1,10 @@
-import {
-  useAddToCart,
-  useChangeQuantity,
-  useClearCart,
-  useGetCartByRestaurantId,
-} from '@entities/profile-group/cart';
 import { ChangeQuantityEnum } from '@shared/api/dto/Api';
 import { useMemo } from 'react';
+
+import { useAddToCart } from '../api/use-add-to-cart';
+import { useChangeQuantity } from '../api/use-change-quantity';
+import { useClearCart } from '../api/use-clear-cart';
+import { useGetCartByRestaurantId } from '../api/use-get-cart-by-restaurant-id';
 
 export const useUserCart = (restaurantId: number) => {
   const { data: cart } = useGetCartByRestaurantId(restaurantId);
