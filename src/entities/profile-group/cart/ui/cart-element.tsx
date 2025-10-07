@@ -1,6 +1,6 @@
 import { Box, Card, CardContent, Typography } from '@mui/material';
 import { type CartItem, ChangeQuantityEnum } from '@shared/api/dto/Api';
-import { ProductQuantityChangeButton } from '@shared/ui/product-quantity-change-button';
+import { Counter } from '@shared/ui/counter';
 import type { FC } from 'react';
 
 import styles from './cart-element.module.css';
@@ -11,8 +11,12 @@ interface CartItemProps {
 }
 
 export const CartElement: FC<CartItemProps> = ({ item, changeQuantity }) => {
-  const handleChange = (action: ChangeQuantityEnum) => {
-    changeQuantity(item.id, action);
+  const handleIncrease = () => {
+    changeQuantity(item.id, ChangeQuantityEnum.Value0);
+  };
+
+  const handleDecrease = () => {
+    changeQuantity(item.id, ChangeQuantityEnum.Value1);
   };
 
   return (
@@ -36,9 +40,10 @@ export const CartElement: FC<CartItemProps> = ({ item, changeQuantity }) => {
             {item.price} ₽
           </Typography>
 
-          <ProductQuantityChangeButton
-            quantity={item.quantity}
-            onChange={handleChange}
+          <Counter
+            count={item.quantity}
+            onIncrease={handleIncrease}
+            onDecrease={handleDecrease}
           />
         </Box>
       </CardContent>
