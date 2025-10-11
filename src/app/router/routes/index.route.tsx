@@ -1,19 +1,20 @@
-import { Layout } from '@app/layout';
+import { RestaurantsPage } from '@pages/restaurants-group/restaurants';
+import type { RouteObject } from 'react-router';
 
-import { cartRoute } from './profile/cart.route';
-import { checkoutRoute } from './profile/checkout.route';
-import { ordersRoute } from './profile/orders.route';
+import { profileRoutes } from './profile/profile.routes';
 import { restaurantRoute } from './restaurants/restaurant.route';
-import { restaurantsRoute } from './restaurants/restaurants.route';
 
-export const indexRoute = {
-  path: '/',
-  element: <Layout />,
-  children: [
-    restaurantsRoute,
-    restaurantRoute,
-    cartRoute,
-    checkoutRoute,
-    ordersRoute,
-  ],
-};
+export const indexRoute: RouteObject[] = [
+  {
+    path: '/',
+    element: <RestaurantsPage />,
+  },
+  {
+    path: 'profile/*',
+    children: [...profileRoutes],
+  },
+  {
+    path: 'restaurant/*',
+    children: [restaurantRoute],
+  },
+];

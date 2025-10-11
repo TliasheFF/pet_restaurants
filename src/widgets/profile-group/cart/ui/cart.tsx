@@ -24,7 +24,7 @@ export const Cart = () => {
   };
 
   const handleCreateOrder = () => {
-    navigate(`/checkout/${seoUrl}`);
+    navigate(`/profile/checkout/${seoUrl}`);
   };
   return (
     <>

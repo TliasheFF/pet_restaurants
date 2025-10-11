@@ -1,7 +1,7 @@
-import { OrdersPage, OrdersPageLayout } from '@pages/profile-group/orders';
+import { OrdersPage } from '@pages/profile-group/orders';
+import type { RouteObject } from 'react-router';
 
-export const ordersRoute = {
-  path: 'profile/orders',
-  element: <OrdersPageLayout />,
-  children: [{ index: true, element: <OrdersPage /> }],
+export const ordersRoute: RouteObject = {
+  path: '*',
+  element: <OrdersPage />,
 };

@@ -1,6 +1,6 @@
 import { NotFoundPage } from '@pages/not-found';
 
-export const notFountRoute = {
+export const notFoundRoute = {
   path: '*',
   element: <NotFoundPage />,
 };
