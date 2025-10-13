@@ -3,7 +3,7 @@ import { AppBar, Box, Button, Toolbar, Typography } from '@mui/material';
 import { ProfileMenu } from '@widgets/profile-group/profile-menu';
 import { useNavigate } from 'react-router';
 
-export const Header = () => {
+export const MainHeader = () => {
   const navigate = useNavigate();
 
   return (

@@ -1,5 +1,6 @@
 import { ArrowBack } from '@mui/icons-material';
 import { Box, Button, Container } from '@mui/material';
+import { MainHeader } from '@widgets/main-header';
 import { Checkout } from '@widgets/profile-group/checkout';
 import { useNavigate, useParams } from 'react-router';
 
@@ -10,17 +11,20 @@ export const CheckoutPage = () => {
   const { seoUrl = '' } = useParams();
 
   return (
-    <Container maxWidth="lg" className={styles['checkout-page']}>
-      <Box display="flex" alignItems="center" mb={2}>
-        <Button
-          startIcon={<ArrowBack />}
-          onClick={() => navigate(`/profile/cart/${seoUrl}`)}
-        >
-          В корзину
-        </Button>
-      </Box>
+    <>
+      <MainHeader />
+      <Container maxWidth="lg" className={styles['checkout-page']}>
+        <Box display="flex" alignItems="center" mb={2}>
+          <Button
+            startIcon={<ArrowBack />}
+            onClick={() => navigate(`/profile/cart/${seoUrl}`)}
+          >
+            В корзину
+          </Button>
+        </Box>
 
-      <Checkout />
-    </Container>
+        <Checkout />
+      </Container>
+    </>
   );
 };

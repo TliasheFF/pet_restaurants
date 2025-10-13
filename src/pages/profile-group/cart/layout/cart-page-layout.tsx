@@ -1,5 +1,6 @@
 import { ArrowBack } from '@mui/icons-material';
 import { Box, Button, Container } from '@mui/material';
+import { MainHeader } from '@widgets/main-header';
 import { Outlet, useNavigate, useParams } from 'react-router';
 
 export const CartPageLayout = () => {
@@ -7,16 +8,19 @@ export const CartPageLayout = () => {
   const navigate = useNavigate();
 
   return (
-    <Container maxWidth="lg" sx={{ marginY: 1 }}>
-      <Box display="flex" alignItems="center" mb={2}>
-        <Button
-          startIcon={<ArrowBack />}
-          onClick={() => navigate(`/restaurant/${seoUrl}`)}
-        >
-          В ресторан
-        </Button>
-      </Box>
-      <Outlet />
-    </Container>
+    <>
+      <MainHeader />
+      <Container maxWidth="lg" sx={{ marginY: 1 }}>
+        <Box display="flex" alignItems="center" mb={2}>
+          <Button
+            startIcon={<ArrowBack />}
+            onClick={() => navigate(`/restaurant/${seoUrl}`)}
+          >
+            В ресторан
+          </Button>
+        </Box>
+        <Outlet />
+      </Container>
+    </>
   );
 };
