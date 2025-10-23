@@ -7,7 +7,6 @@ import styles from './home-page.module.css';
 export const HomePage = () => {
   return (
     <>
-      <div>Hello</div>
       <MainHeader />
       <Container maxWidth="lg" className={styles['home-page']}>
         <RestaurantsList />
