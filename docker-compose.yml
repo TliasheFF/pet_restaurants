@@ -1,0 +1,12 @@
+services: 
+  restaurant-frontend:
+    container_name: frontend
+    ports:
+      - "328:80"
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: >
+      sh -c "echo '🚀 Frontend started on http://localhost:328' 
+      && nginx -g 'daemon off;'"

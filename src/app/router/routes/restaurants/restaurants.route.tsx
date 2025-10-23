@@ -1,3 +1,3 @@
-import { RestaurantsPage } from '@pages/restaurants-group/restaurants';
+import { HomePage } from '@pages/home';
 
-export const restaurantsRoute = { index: true, element: <RestaurantsPage /> };
+export const restaurantsRoute = { index: true, element: <HomePage /> };
