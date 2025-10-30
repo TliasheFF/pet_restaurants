@@ -1,1 +1,1 @@
-export { RestaurantPage } from './restaurant-page';
+export { RestaurantPage as default } from './restaurant-page';

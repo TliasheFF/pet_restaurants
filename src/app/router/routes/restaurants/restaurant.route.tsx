@@ -1,6 +1,11 @@
-import { RestaurantPage } from '@pages/restaurants-group/restaurant';
+import { lazy } from 'react';
+import type { RouteObject } from 'react-router';
 
-export const restaurantRoute = {
+const RestaurantPage = lazy(
+  () => import('@pages/restaurants-group/restaurant'),
+);
+
+export const restaurantRoute: RouteObject = {
   path: ':seoUrl',
   element: <RestaurantPage />,
 };
